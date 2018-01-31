@@ -1,0 +1,97 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+  <!-- begin canvas animation bg -->
+  <div id="canvas-wrapper">
+    <canvas id="demo-canvas"></canvas>
+  </div>
+
+  <!-- Begin: Content -->
+  <section id="content">
+    <div class="admin-form theme-info" id="login1">
+
+      <div class="row mb15 table-layout">
+
+        <div class="col-xs-6 va-m pln">
+          <a ui-sref="dashboard" title="Return to Dashboard">
+            <img src="../assets/img/logos/logo_white.png" title="AdminDesigns Logo" class="img-responsive w250">
+          </a>
+        </div>
+        <div class="col-xs-6 text-right va-b pr5">
+          <div class="login-links">
+            <a ui-sref="forgotpassword" class="active" title="forgot password">Forgot Password?</a>
+            <span class="text-white"> | </span>
+            <a ui-sref="signup" class="" title="Register">Register</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="panel panel-info mt10 br-n">
+        <div class="panel-heading heading-border bg-white">
+
+        </div>
+        <!-- end .form-header section -->
+        <form method="post" id="Loginform" name="Loginform" ng-submit="login(Loginform)" novalidate>
+          <div class="panel-body bg-light p30">
+            <div class="row">
+              <div class="col-md-10 col-sm-10 col-xs-10 center-block">
+
+                <div class="mt10 mb40">
+                  <h3 class="text-center">Login to your Account</h3>
+                </div>
+
+                <div class="section">
+                  <label for="mobile_phone" class="field-label text-muted fs18 mb10">Mobile Number</label>
+                  <label for="mobile_phone" class="field prepend-icon" ng-class="showMessage(Loginform.mobile_phone)?'state-error':''">
+                    <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" name="mobile_phone" id="mobile_phone" class="gui-input form-control" ng-model="user.mobile" placeholder="Enter Mobile Number"
+                      required>
+                    <label for="mobile_phone" class="field-icon">
+                      <i class="fa fa-phone"></i>
+                    </label>
+                    <span ng-messages="(Loginform.mobile_phone.$touched && Loginform.mobile_phone.$error)" role="alert">
+                      <span class="error-message" ng-show="showMessage(Loginform.mobile_phone)">Please enter valid Mobile Number.</span>
+                    </span>
+                  </label>
+                </div>
+                <!-- end section -->
+
+                <div class="section">
+                  <label for="password" class="field-label text-muted fs18 mb10">Password</label>
+                  <label for="password" class="field prepend-icon" ng-class="showMessage(Loginform.password)?'state-error':''">
+                    <input type="password" name="password" id="password" class="gui-input form-control" ng-model="user.password" placeholder="Enter Password"
+                      required>
+                    <label for="password" class="field-icon">
+                      <i class="fa fa-lock"></i>
+                    </label>
+                    <span ng-messages="((Loginform.password.$touched && Loginform.password.$error) || (Loginform.$submitted && Loginform.password.$error))"
+                      role="alert">
+                      <span class="error-message" ng-show="showMessage(Loginform.password)">Please complete this mandatory field.</span>
+                    </span>
+                  </label>
+                </div>
+
+                <!-- end section -->
+              </div>
+            </div>
+            <div class=" bg-light text-danger text-center error-message" ng-if="errorMessage">{{errorMessage}}</div>
+          </div>
+          <!-- end .form-body section -->
+
+          <div class="panel-footer clearfix p10 ph15">
+            <button type="submit" class="button btn-primary mr10 pull-right"> Login</button>
+            <label class="switch block switch-primary pull-left input-align mt10">
+              <input type="checkbox" name="remember" id="remember" checked>
+              <label for="remember" data-on="YES" data-off="NO"></label>
+              <span>Remember me</span>
+            </label>
+          </div>
+          <!-- end .form-footer section -->
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- End: Content -->
+
+</section>
+<!-- End: Content-Wrapper -->

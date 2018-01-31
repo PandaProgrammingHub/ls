@@ -1,0 +1,242 @@
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="subject_teacherMapping({schoolId:schoolId, schoolname:schoolname})">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">Basic Information</li>
+            </ol>
+        </div>
+    </header>
+
+    <div id="content" class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <span class="panel-title">Basic Profile Information</span>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" name="editbasicprofileform"  ng-submit="editBasicProfilePost(editbasicprofileform)">
+                            <div class="row pt10">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Name</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" class="field prepend-icon form-control" placeholder="Enter Full Name" ng-model="schoolBasicInfoMapDetails.name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Type of School</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" ng-model="schoolBasicInfoMapDetails.school_type_id" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Logo</label>
+                                        <div class="col-lg-8">
+                                            <input type="file" ng-model="schoolBasicInfoMapDetails.logo" class="form-control" placeholder="Upload your Logo">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPassword" class="col-lg-3 control-label">Cover Image</label>
+                                        <div class="col-lg-8">
+                                            <input type="file" class="form-control" ng-model="schoolBasicInfoMapDetails.cover_img" name="upload1" placeholder="Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Cluster</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" ng-model="schoolBasicInfoMapDetails.cluster_id" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">School Chain</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" ng-model="schoolBasicInfoMapDetails.chain" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Add Acad Year</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" ng-model="schoolBasicInfoMapDetails.acadminc_year_id" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="datetimepicker2">Established</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon cursor">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="date" class="form-control" ng-model="schoolBasicInfoMapDetails.estabished">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label" for="textArea2">Mission</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <textarea id="mission" name="mission" class="gui-input field prepend-icon form-control" rows="3" ng-model="schoolBasicInfoMapDetails.mission"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label" for="vision">Vision</label>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" name="vision" ng-model="schoolBasicInfoMapDetails.vision" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label" for="textArea1">Address Line 1</label>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" ng-model="schoolBasicInfoMapDetails.address_line1" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label" for="textArea1">Address Line 2</label>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" ng-model="schoolBasicInfoMapDetails.address_line2" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Admin Telephone</label>
+                                        <div class="col-lg-8 input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="number" ng-model="schoolBasicInfoMapDetails.admin_telephone" class="form-control" placeholder="Admin Telephone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Telephone</label>
+                                        <div class="col-lg-8 input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="number" ng-model="schoolBasicInfoMapDetails.admin_telephone2" class="form-control" placeholder="Telephone">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">City</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" name="fullname" id="fullname" ng-model="schoolBasicInfoMapDetails.city" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">State</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="text" name="fullname" id="fullname" ng-model="schoolBasicInfoMapDetails.state" class="field prepend-icon form-control" placeholder="Enter Full Name" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Pincode</label>
+                                        <div class="col-lg-8 gui-input field prepend-icon">
+                                            <input type="number" ng-model="schoolBasicInfoMapDetails.pincode_id" class="field prepend-icon form-control" placeholder="Enter Full Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Email</label>
+                                        <div class="col-lg-8 input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                            <input type="mail" ng-model="schoolBasicInfoMapDetails.email" class="form-control" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Website</label>
+                                        <div class="col-lg-8 input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-globe"></i>
+                                            </span>
+                                            <input type="text" ng-model="schoolBasicInfoMapDetails.website" class="form-control" placeholder="Website">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Newspaper/Magazines</label>
+                                        <div class="col-lg-8 input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-newspaper-o"></i>
+                                            </span>
+                                            <input type="mail" ng-model="schoolBasicInfoMapDetails.newsmagzines" class="form-control" placeholder="Newspaper / Magazines">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputStandard" class="col-lg-3 control-label">Year Book</label>
+                                        <div class="col-lg-8">
+                                            <input type="number" ng-model="schoolBasicInfoMapDetails.year_book" class="form-control" placeholder="Enter a Year Book">
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+
+                            <div class="panel-footer text-right">
+                                <div class="col-md-2 center-block">
+                                    <button type="submit" class="btn button btn-primary"> Submit Form </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- End: Content -->
+
+</section>

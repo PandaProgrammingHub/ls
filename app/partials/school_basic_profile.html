@@ -1,0 +1,308 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+        <header id="topbar">
+           <div class="topbar-left">
+              <ol class="breadcrumb">
+                 <li class="crumb-icon">
+                    <a ui-sref="salesdashboard">
+                    <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                 </li>
+                 <li class="crumb-link">
+                    <a ui-sref="salesdashboard">Home</a>
+                 </li>
+                 <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                 </li>
+                 <li class="crumb-link">{{schoolname}}</li>
+                 <li class="crumb-trail">Basic Information</li>
+              </ol>
+           </div>
+        </header>
+        <div id="content" class="animated fadeIn">
+           <div class="row">
+              <div class="col-md-12">
+                 <div class="panel">
+                    <div class="panel-heading">
+                       <span class="panel-title">Basic Profile Information</span>
+                    </div>
+                    <div class="panel-body">
+                       <form class="form-horizontal" method="post" ng-submit="schoolBasicProfile(schoolBasicProfileForm)" id="schoolBasicProfileForm" name="schoolBasicProfileForm" novalidate>
+                          <div style="position: relative; top: 10px">
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                   <label for="inputStandard" class="col-lg-3 control-label">Name</label>
+                                   <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(schoolBasicProfileForm.fullname)?'state-error':''"> 
+                                      <input type="text" name="fullname" id="fullname" required ng-model="school.name" class="field prepend-icon form-control" placeholder="Enter Full Name">
+                                      <span ng-messages="(schoolBasicProfileForm.fullname.$touched && schoolBasicProfileForm.fullname.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.fullname)">Please enter Name.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="logo" class="col-lg-3 control-label">Logo</label>
+                                   <div class="col-lg-8">
+                                       <div class="col-lg-2">
+                                            <img ng-src="{{school.logo}}" alt="Logo" style="width:60px;margin-top: -14px;">                                            
+                                       </div>
+                                       <div class="col-lg-6">
+                                        <input type="file" demo-file-model="school.logo"  class="form-control" id="logo" name="logo"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">Cluster</label>
+                                   <div class="col-lg-8">
+                                      <div class="input-group date" ng-class="showMessage(schoolBasicProfileForm.cluster)?'state-error':''">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-home"></i>
+                                         </span>
+                                         <select id="cluster" name="cluster" required ng-model="school.cluster" class="form-control">
+                                                <option selected>Select cluster</option>
+                                                <option ng-repeat="clusterMaster in clusterMasters" value="{{clusterMaster.id}}">{{clusterMaster.name}}</option>
+                                            </select>
+                                         <span ng-messages="(schoolBasicProfileForm.cluster.$touched && schoolBasicProfileForm.cluster.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.cluster)">Please select cluster.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">Add Acad Year</label>
+                                   <div class="col-lg-8">
+                                      <div class="input-group date" ng-class="showMessage(schoolBasicProfileForm.acadyear)?'state-error':''">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-calendar"></i>
+                                         </span>
+                                         <select id="acadyear" name="acadyear" required ng-model="school.acadyear" class="gui-input field prepend-icon form-control">
+                                            <option value="">Select Acadmic Year</option>
+                                            <option ng-repeat="academicYearMaster in academicYearMasters" value="{{academicYearMaster.id}}">{{academicYearMaster.code}}</option>
+                                         </select>
+                                         <span ng-messages="(schoolBasicProfileForm.acadyear.$touched && schoolBasicProfileForm.acadyear.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.acadyear)">Please select acadmic year.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label" for="textArea2">Mission</label>
+                                   <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(schoolBasicProfileForm.mission)?'state-error':''">
+                                      <textarea id="mission" name="mission" ng-model="school.mission" class="gui-input field prepend-icon form-control" rows="3" required></textarea>
+                                      <span ng-messages="(schoolBasicProfileForm.mission.$touched && schoolBasicProfileForm.mission.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.mission)">Please enter mission.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label" for="textArea1">Address Line 1</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.address1)?'state-error':''">
+                                      <textarea class="gui-input field prepend-icon form-control textarea-grow" ng-model="school.address1" id="address1" name="address1" rows="2" required></textarea>
+                                      <span ng-messages="(schoolBasicProfileForm.address1.$touched && schoolBasicProfileForm.address1.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.address1)">Please enter address 1.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label" for="textArea1">Address Line 2</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.address2)?'state-error':''">
+                                      <textarea class="field form-control textarea-grow" id="address2" ng-model="school.address2" name="address2" rows="2" required></textarea>
+                                      <span ng-messages="(schoolBasicProfileForm.address2.$touched && schoolBasicProfileForm.address2.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.address2)">Please enter address 2.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pincode" class="col-lg-3 control-label">Pincode</label>
+                                    <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(schoolBasicProfileForm.pincode)?'state-error':''">
+                                       <input type="number" type="text" ng-blur="checkPinCode(school.pincode)" name="pincode" id="pincode" ng-model="school.pincode" class="field prepend-icon form-control" placeholder="Enter Pincode" required>
+                                       <span ng-messages="(schoolBasicProfileForm.pincode.$touched && schoolBasicProfileForm.pincode.$error)" role="alert">
+                                       <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.pincode)">Please enter pincode.</span>
+                                       </span>
+                                    </div>
+                                 </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">City</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.city)?'state-error':''">
+                                      <div class="input-group date">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-home"></i>
+                                         </span>
+                                         <select id="city" ng-disabled="showCityState" name="city" ng-model="school.city" class="field form-control" required>
+                                            <option value="">choose city</option>
+                                            <option ng-repeat="pincodeDetail in pincodeDetails " value="{{pincodeDetail.city}}">{{pincodeDetail.city}}</option>
+                                         </select>
+                                         <span ng-messages="(schoolBasicProfileForm.city.$touched && schoolBasicProfileForm.city.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.city)">Please select city.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">State</label>
+                                   <div class="col-lg-8"  ng-class="showMessage(schoolBasicProfileForm.state)?'state-error':''">
+                                      <div class="input-group date">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-home"></i>
+                                         </span>
+                                         <select id="state" ng-disabled="showCityState" name="state" ng-model="school.state" class="field form-control" required>
+                                            <option value="">choose state</option>
+                                            <option ng-repeat="uniqueState in uniqueStates " value="{{uniqueState}}">{{uniqueState}}</option>
+                                         </select>
+                                         <span ng-messages="(schoolBasicProfileForm.state.$touched && schoolBasicProfileForm.state.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.state)">Please select state.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="yearBook" class="col-lg-3 control-label">Year Book</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.yearBook)?'state-error':''">
+                                      <input type="number" id="yearBook" name="yearBook" class="form-control" ng-model="school.yearBook" placeholder="Enter a Year Book">
+                                      <span ng-messages="(schoolBasicProfileForm.yearBook.$touched && schoolBasicProfileForm.yearBook.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.yearBook)">Please enter year book.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">Type of School</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.school_type)?'state-error':''">
+                                      <div class="input-group date">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-home"></i>
+                                         </span>
+                                         <select id="school_type" ng-model="school.school_type" class="form-control" name="school_type">
+                                            <option value="">Type of School</option>
+                                            <option ng-repeat="schoolTypeMaster in schoolTypeMasters" value="{{schoolTypeMaster.id}}">{{schoolTypeMaster.name}}</option>
+                                         </select>
+                                         <span ng-messages="(schoolBasicProfileForm.school_type.$touched && schoolBasicProfileForm.school_type.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.school_type)">Please select school Type.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="coverImage" class="col-lg-3 control-label">Cover Image</label>
+                                   <div class="col-lg-8">
+                                       <div class="col-lg-2">
+                                            <img ng-src="{{school.coverImage}}" alt="coverImage" style="width:60px;margin-top: -14px;">
+                                       </div>
+                                       <div class="col-lg-6">                                        
+                                      <input type="file" demo-file-model="school.coverImage"  class="form-control" id="coverImage" name="coverImage"/>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label">School Chain</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.school_chain)?'state-error':''">
+                                      <div class="input-group date">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-home"></i>
+                                         </span>
+                                         <select id="school_chain" class="form-control" ng-model="school.school_chain" name="school_chain">
+                                            <option value="">School A</option>
+                                            <option value="AL">School B</option>
+                                            <option value="AL">School C</option>
+                                         </select>
+                                         <span ng-messages="(schoolBasicProfileForm.school_chain.$touched && schoolBasicProfileForm.school_chain.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.school_chain)">Please select school chain.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-md-3 control-label" for="datetimepicker2">Established</label>
+                                   <div class="col-md-8" ng-class="showMessage(schoolBasicProfileForm.established)?'state-error':''">
+                                      <div class="input-group date" id="datetimepicker2">
+                                         <span class="input-group-addon cursor">
+                                         <i class="fa fa-calendar"></i>
+                                         </span>
+                                         <input type="date" class="form-control" required id="established" name="established" ng-model="school.established" ng-value="school.established | date:'yyyy-MM-dd'">
+                                         <span ng-messages="(schoolBasicProfileForm.established.$touched && schoolBasicProfileForm.established.$error)" role="alert">
+                                         <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.established)">Please enter Established.</span>
+                                         </span>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label class="col-lg-3 control-label" for="vision">Vision</label>
+                                   <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.vision)?'state-error':''">
+                                      <textarea class="form-control" id="vision" name="vision" ng-model="school.vision" required rows="3"></textarea>
+                                      <span ng-messages="(schoolBasicProfileForm.vision.$touched && schoolBasicProfileForm.vision.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.vision)">Please enter vision.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="inputStandard" class="col-lg-3 control-label">Admin Telephone</label>
+                                   <div class="col-lg-8 input-group" ng-class="showMessage(schoolBasicProfileForm.admin_mobile)?'state-error':''">
+                                      <span class="input-group-addon">
+                                      <i class="fa fa-phone"></i>
+                                      </span>
+                                      <input type="number" id="admin_mobile" name="admin_mobile" class="form-control" ng-model="school.admin_mobile" required placeholder="Admin Telephone">
+                                      <span ng-messages="(schoolBasicProfileForm.admin_mobile.$touched && schoolBasicProfileForm.admin_mobile.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.admin_mobile)">Please enter admin telephone.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="inputStandard" class="col-lg-3 control-label">Telephone</label>
+                                   <div class="col-lg-8 input-group" ng-class="showMessage(schoolBasicProfileForm.home_phone)?'state-error':''">
+                                      <span class="input-group-addon">
+                                      <i class="fa fa-phone"></i>
+                                      </span>
+                                      <input type="number" id="home_phone" name="home_phone" ng-model="school.home_phone" required class="form-control" placeholder="Telephone">
+                                      <span ng-messages="(schoolBasicProfileForm.home_phone.$touched && schoolBasicProfileForm.home_phone.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.home_phone)">Please enter telephone.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="inputStandard" class="col-lg-3 control-label">Email</label>
+                                   <div class="col-lg-8 input-group" ng-class="showMessage(schoolBasicProfileForm.email)?'state-error':''">
+                                      <span class="input-group-addon">
+                                      <i class="fa fa-envelope"></i>
+                                      </span>
+                                      <input type="mail" id="email" name="email" ng-model="school.email" class="form-control" placeholder="Email">
+                                      <span ng-messages="(schoolBasicProfileForm.email.$touched && schoolBasicProfileForm.email.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.email)">Please enter email.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="inputStandard" class="col-lg-3 control-label">Website</label>
+                                   <div class="col-lg-8 input-group" ng-class="showMessage(schoolBasicProfileForm.website)?'state-error':''" >
+                                      <span class="input-group-addon">
+                                      <i class="fa fa-globe"></i>
+                                      </span>
+                                      <input type="mail" id="website" name="website" ng-model="school.website" required class="form-control" placeholder="Website">
+                                      <span ng-messages="(schoolBasicProfileForm.website.$touched && schoolBasicProfileForm.website.$error)" role="alert">
+                                      <span class="error-message" ng-show="showMessage(schoolBasicProfileForm.website)">Please enter website.</span>
+                                      </span>
+                                   </div>
+                                </div>
+                                <div class="form-group">
+                                   <label for="newspaper" class="col-lg-3 control-label">Newspaper</label>
+                                   <div class="col-lg-8 input-group">
+                                      <span class="input-group-addon">
+                                      <i class="fa fa-newspaper-o"></i>
+                                      </span>
+                                      <input type="text" id="newspaper" ng-model="school.newspaper" class="form-control" placeholder="Newspaper / Magazines">
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                          <div class="panel-footer text-right">
+                             <div class="col-md-2 center-block">
+                                <button type="submit" class="btn button btn-primary"> Submit Form </button>
+                             </div>
+                          </div>
+                       </form>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <!-- End: Content -->
+     </section>

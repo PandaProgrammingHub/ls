@@ -1,0 +1,11 @@
+# pack-refs with: peeled fully-peeled 
+1f7f156b4947952e807f5bcfc414dd19dba1d31b refs/remotes/origin/Authentication
+d4349e039de5e5918c9f71aa20cf7856fa040c6c refs/remotes/origin/alam
+efdf46e902b484e81694bac457f2b967f5e7d10e refs/remotes/origin/dev-anupam
+c16a3a83e97aa595c5acdea6ca5a6ad5f1b671d0 refs/remotes/origin/dev-navi
+390c7924d61dfe7e7a0a248a347388a1e150fd7e refs/remotes/origin/dev-santosh
+cb67d1f8a790c172aa88cfd21ff3489bfa5c86d2 refs/remotes/origin/kirandev
+5ba70f2ca930976f589264a96ad09c58e06c37b6 refs/remotes/origin/master
+f053e91d8568d935cef73764740abd3a3b558765 refs/remotes/origin/master-01
+450da42832a90fbab028a1b0d8726ff3ac729019 refs/remotes/origin/sagar
+58a36ac5c89a4d199a1350236932a83d9618eb43 refs/remotes/origin/staging

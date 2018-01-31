@@ -1,0 +1,113 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+    <header id="topbar">
+       <div class="topbar-left">
+          <ol class="breadcrumb">
+             <li class="crumb-icon">
+                <a ui-sref="salesdashboard">
+                <span class="glyphicon glyphicon-home"></span>
+                </a>
+             </li>
+             <li class="crumb-link">
+                <a ui-sref="salesdashboard">Home</a>
+             </li>
+             <li class="crumb-link">
+                <a ui-sref="school_master">School</a>
+             </li>
+             <li class="crumb-link">
+                <a ui-sref="school_basic_profile({schoolId:schoolId,schoolname:schoolname})">{{schoolname}}</a>
+             </li>
+             <li class="crumb-trail">Agreement Document</li>
+          </ol>
+       </div>
+    </header>
+    <div id="content" class="animated fadeIn">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="panel">
+                <div class="panel-heading">
+                   <span class="panel-title">Agreement Document</span>
+                </div>
+                <!-- <div class="panel-body">
+                   <h2></h2>
+                   <form class="form-horizontal" method="post" ng-submit="addDocument(schoolDocumentForm)" id="schoolDocumentForm" name="schoolDocumentForm" novalidate>
+                      <div id="duplicater">
+                         <div class="col-md-6">
+                            <div class="form-group">
+                               <label class="col-lg-3 control-label">Document</label>
+                               <div class="col-lg-8">
+                                  <div class="input-group date" ng-class="showMessage(schoolDocumentForm.document_type)?'state-error':''">
+                                     <span class="input-group-addon cursor">
+                                     <i class="fa fa-file"></i>
+                                     </span>
+                                     <select id="document_type" ng-model="school.document_type" required  class="gui-input field prepend-icon form-control" name="document_type">
+                                       <option value="">Select Type</option>
+                                       <option value="Agreement Copy">Agreement Copy</option>
+                                     </select>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                                <div class="form-group">
+                                        <label for="document" class="col-lg-3 control-label">Document</label>
+                                        <div class="col-lg-8">
+                                           <input type="file" demo-file-model="school.document"  class="form-control" id="document" name="document"/>
+                                        </div>
+                                </div>
+                         </div>
+                      </div>
+                      <div class="mt10 mb10">
+                            <div class="col-md-2 center-block">
+                                  <button type="submit" class="btn button btn-primary"> Submit </button>                            
+                            </div>
+                         </div>
+                   </form>
+                   <div class="panel-body pn" style="overflow: hidden;">
+                        <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                           aria-describedby="example_info" style="width: 100%;">
+                           <thead>
+                              <tr class="bg-light">
+                                 <th>#SI</th>
+                                 <th>Document Id</th>
+                                 <th>Document Type</th>
+                                 <th>Document</th>
+                                 <th>School Id</th>
+                                 <th>Created At</th>
+                                 <th>Updated At</th>
+                                 <th>Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr ng-repeat="document_detail in document_details">
+                                  <td>{{$index+1}}</td>
+                                  <td>{{document_detail.doc_id}}</td>
+                                  <td>{{document_detail.document_type}}</td>
+                                  <td><img ng-src="{{document_detail.document_url}}" alt="{{document_detail.document_url}}"></td>
+                                  <td>{{document_detail.school_id}}</td>
+                                  <td>{{document_detail.created_at}}</td>
+                                  <td>{{document_detail.updated_at}}</td>
+                                  <td class="center">
+                                        <a href="javascript:void(0);" class="hidden-xs badge badge-system fs11 mr10">Delete</a>
+                                     </td>
+                              </tr>
+                           </tbody>
+                        </table></div>
+                                    
+                </div> -->
+                <div class="panel-body">
+                   <h2></h2>
+                   <div class="mt9 mb9">
+                        <div class="col-md-2 center-block">
+                              <a ui-sref="school_agreement_document_download({schoolId:schoolId,schoolname:schoolname})" class="btn btn-black btn-primary generate_document" target="_blank">Generate Document</a>  
+                        </div>
+                     </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <section id="content" class="table-layout animated fadeIn">
+    </section>
+    <!-- End: Content -->
+ </section>

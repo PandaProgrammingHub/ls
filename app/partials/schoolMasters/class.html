@@ -1,0 +1,208 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">School Master</li>
+                <li class="crumb-trail">Class</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage School Class
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="editor_create btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addClassModal">
+                            <span class="glyphicons glyphicons-circle_plus"></span> Add Class</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add Modal -->
+            <div class="modal fade" id="addClassModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelClass()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Class</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="addClassForm" role="form" ng-submit="addClassDetails(addClassForm)" novalidate>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="name">Class Name:</label>
+                                            <input type="text" class="form-control v-form-control" name="name" ng-model="addClassData.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Class Name" id="name" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" required>
+                                            <span ng-messages="((addClassForm.name.$touched && addClassForm.name.$error) || (addClassForm.$submitted && addClassForm.name.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid class name.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="name">Class Code:</label>
+                                            <input type="text" class="form-control v-form-control" name="code" ng-model="addClassData.class_code" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Class Code" id="code">
+                                            <span ng-messages="((addClassForm.code.$touched && addClassForm.code.$error) || (addClassForm.$submitted && addClassForm.code.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 section">
+                                        <label for="name" class="field select"  ng-class="showMessage(addClassForm.class_type)?'state-error':''">Class Type:</label>
+                                        <select ng-model="addClassData.class_type" ng-change="classtypeChange(addClassData.class_type)" id="class_type" class="form-control v-form-control">
+                                            <option value="regular" selected="selected">Regular Class</option>
+                                            <option value="elga">Elga Class</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-if="subShow">
+                                    <label ng-repeat="subject in subjectDetails" class="checkbox_space">
+                                        <input type="checkbox" class="checkbox_align" checklist-model="subject_ids" checklist-value="subject.id"> {{subject.name}}
+                                    </label>
+                                </div>
+                                <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                    Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editClassModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelClass()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Class</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="editClassForm" role="form" ng-submit="editClassDetails(editClassForm)" novalidate>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="name">Class Name:</label>
+                                            <input type="text" class="form-control v-form-control" name="name" ng-model="classDetailsByid.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Class Name" id="name">
+                                            <span ng-messages="((editClassForm.name.$touched && editClassForm.name.$error) || (editClassForm.$submitted && editClassForm.name.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid class name.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="name">Class Code:</label>
+                                            <input type="text" class="form-control v-form-control" name="code" ng-model="classDetailsByid.class_code" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Class code" id="code">
+                                            <span ng-messages="((editClassForm.code.$touched && editClassForm.code.$error) || (editClassForm.$submitted && editClassForm.code.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 section">
+                                            <label for="name" class="field select">Class Type:</label>
+                                            <select ng-model="classDetailsByid.class_type" ng-change="classtypeChange(classDetailsByid.class_type)" id="class_type" class="form-control v-form-control">
+                                                <option value="regular" selected="selected">Regular Class</option>
+                                                <option value="elga">Elga Class</option>
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="form-group" ng-if="subShow">
+                                    <label ng-repeat="subject in subjectDetails" class="checkbox_space">
+                                        <input type="checkbox" class="checkbox_align" checklist-model="subject_ids" checklist-value="subject.id"> {{subject.name}}
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary center-block element_center">Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Modal End-->
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" aria-describedby="example_info">
+                <thead>
+
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Class Name</th>
+                        <th class="">Class Code</th>
+                        <th class="">Class Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+                    </tr>
+
+                </thead>
+                <tfoot>
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Class Name</th>
+                        <th class="">Class Code</th>
+                        <th class="">Class Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr id="row_1" role="row" class="odd" ng-repeat="class in classDetails">
+                        <!-- <td class="text-center sorting_1">{{class.id}}</td> -->
+                        <td class="">{{class.name}}</td>
+                        <td class="">{{class.class_code}}</td>
+                        <td class="">{{class.class_type}}</td>
+                        <td class="text-center">{{class.created_at | date : "y-MM-dd"}}</td>
+                        <td class="text-center">
+                            <a ng-click="getClassDetailsByID(class.id)" data-toggle="modal" data-target="#editClassModal" class="text-center editor_edit cursor">Edit</a>
+                        </td>
+                        <td class=" text-center">
+                            <a ng-click="deleteClassDetails(class.id)" class="text-center editor_edit cursor">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="notification_popup">Class Name or Type already exist..</div>
+</section>

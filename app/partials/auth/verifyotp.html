@@ -1,0 +1,81 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <!-- begin canvas animation bg -->
+    <div id="canvas-wrapper">
+        <canvas id="demo-canvas"></canvas>
+    </div>
+
+
+    <!-- Begin: Content -->
+    <section id="content">
+
+        <div class="admin-form theme-info" id="login1">
+
+            <div class="row mb15 table-layout">
+
+                <div class="col-xs-6 va-m pln">
+                    <a ui-sref="dashboard" title="Return to Dashboard">
+                        <img src="../assets/img/logos/logo_white.png" title="AdminDesigns Logo" class="img-responsive w250">
+                    </a>
+                </div>
+
+                <div class="col-xs-6 text-right va-b pr5">
+
+                </div>
+
+            </div>
+
+            <div class="panel panel-info mt10 br-n">
+
+                <div class="panel-heading heading-border bg-white">
+
+                </div>
+
+                <!-- end .form-header section -->
+                <form id="verifyOtpForm" name="verifyOtpForm" method="post" ng-submit="verifyOtp(verifyOtpForm)">
+                    <div class="panel-body bg-light">
+                        <div class="row">
+                            <div class="col-md-10 center-block">
+
+                                <div class="mt10 mb40">
+                                    <h3 style="text-align:center">Verify Mobile Number</h3>
+                                </div>
+
+                                <div class="section">
+                                    <label for="otp" class="field-label text-muted fs18 mb10">Enter OTP Number</label>
+                                    <label for="otp" class="field prepend-icon" ng-class="showMessage(verifyOtpForm.otp)?'state-error':''">
+                                        <input type="number" name="otp" id="otp" class="gui-input form-control" ng-model="user.otp" placeholder="Enter OTP Number" required>
+                                        <label for="otp" class="field-icon">
+                                            <i class="fa fa-key"></i>
+                                        </label>
+                                        <span ng-messages="(verifyOtpForm.otp.$touched && verifyOtpForm.otp.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(verifyOtpForm.otp)">Please enter otp.</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <!-- end section -->
+
+                            </div>
+                            <div class=" bg-light text-danger text-center error-message" ng-if="errorMessage">{{errorMessage}}</div>
+                        </div>
+                        <div class="center-block text-center">
+                            <input type="submit" class="button btn btn-hover btn-primary center-block text-center" value="Submit">
+                        </div>
+                        <div class="section-divider">
+                            <span>
+                                <a ui-sref="login" class="center-block text-center">Back to login</a>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- end .form-body section -->
+
+                </form>
+            </div>
+        </div>
+
+    </section>
+    <!-- End: Content -->
+
+</section>
+<!-- End: Content-Wrapper -->

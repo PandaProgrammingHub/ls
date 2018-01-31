@@ -1,0 +1,165 @@
+<!-- Start: Sidebar -->
+<aside id="sidebar_left" class="nano nano-primary sidebar-default has-scrollbar affix">
+    <div class="nano-content" tabindex="0" style="">
+
+        <!-- Start: Sidebar Header -->
+        <header class="sidebar-header">
+            <div class="user-menu">
+                <div class="row text-center mbn">
+                    <div class="col-xs-4">
+                        <a ui-sref="salesdashboard" class="text-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dashboard">
+                            <span class="glyphicons glyphicons-home"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="pages_messages.html" class="text-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Messages">
+                            <span class="glyphicons glyphicons-inbox"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="pages_profile.html" class="text-alert" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tasks">
+                            <span class="glyphicons glyphicons-bell"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="pages_timeline.html" class="text-system" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activity">
+                            <span class="glyphicons glyphicons-imac"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="pages_profile.html" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Settings">
+                            <span class="glyphicons glyphicons-settings"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-4">
+                        <a href="pages_gallery.html" class="text-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Cron Jobs">
+                            <span class="glyphicons glyphicons-restart"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End: Sidebar Header -->
+
+        <!-- sidebar menu -->
+        <ul class="nav sidebar-menu">
+            <!-- <li class="sidebar-label pt20">HOME</li> -->
+
+            <li class="hidden-xs">
+                <a href="#" class="anupam_admin1 fw600 p15">
+                    <img src="../assets/img/avatars/1.jpg" alt="avatar" class="mw30 br64 mr15">
+                    <span class="anupam_admin3 sidebar-title">Admin HO</span>
+                    <span class="anupam_admin2 sidebar-title">Lead School</span>
+                    <!-- <span class="caret caret-tp hidden-xs"></span> -->
+                </a>
+            </li>
+
+            <li class="active">
+                <a ui-sref="salesdashboard">
+                    <span class="glyphicons glyphicons-briefcase"></span>
+                    <span class="sidebar-title">Sales Dashboard</span>
+                </a>
+            </li>
+
+            <li >
+                    <a ui-sref="school_master">
+                        <span class="glyphicons glyphicons-building"></span>
+                        <span class="sidebar-title">Schools</span>
+                    </a>
+            </li>
+
+            <!-- <li class="sidebar-label pt15">School Masters</li> -->
+            <li>
+                <a class="accordion-toggle" href="#">
+                    <span class="glyphicons glyphicons-crown"></span>
+                    <span class="sidebar-title">School Masters</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="nav sub-nav">
+                    <li>
+                        <a ui-sref="board">
+                            <span class="glyphicons glyphicons-filter"></span> Boards </a>
+                    </li>
+                    <li>
+                        <a ui-sref="subject">
+                            <span class="glyphicons glyphicons-more_items"></span> Subjects </a>
+                    </li>
+                    <li>
+                        <a ui-sref="section">
+                            <span class="glyphicons glyphicons-book_open"></span> Sections </a>
+                    </li>
+                    <li>
+                        <a ui-sref="cluster">
+                            <span class="glyphicons glyphicons-coins"></span> Clusters </a>
+                    </li>
+                    <li>
+                        <a ui-sref="component">
+                            <span class="glyphicons glyphicons-show_big_thumbnails"></span> Components </a>
+                    </li>
+                    <li>
+                        <a ui-sref="resource-type">
+                            <span class="glyphicons glyphicons-pie_chart"></span> Resource Types </a>
+                    </li>
+                    <li>
+                        <a ui-sref="role">
+                            <span class="glyphicons glyphicons-group"></span> Roles</a>
+                    </li>
+                    <li>
+                        <a ui-sref="class">
+                            <span class="glyphicons glyphicons-notes"></span> Classes</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="accordion-toggle" href="#">
+                    <span class="glyphicons glyphicons-imac"></span>
+                    <span class="sidebar-title">School Management</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="nav sub-nav">
+                    <li>
+                        <a ui-sref="department">
+                            <span class="glyphicons glyphicons-filter"></span> Department </a>
+                    </li>
+                    <li>
+                        <a ui-sref="designation">
+                            <span class="glyphicons glyphicons-more_items"></span> Designation </a>
+                    </li>
+                    <li>
+                        <a ui-sref="schoolroles">
+                            <span class="glyphicons glyphicons-book_open"></span> Roles </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="accordion-toggle" href="#">
+                    <span class="glyphicons glyphicons-bell"></span>
+                    <span class="sidebar-title">Communications</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="nav sub-nav">
+                    <li>
+                        <a ui-sref="addcommunication">
+                            <span class="glyphicons glyphicons-more_items"></span> Add </a>
+                    </li>
+                    <li>
+                        <a ui-sref="viewcommunication">
+                            <span class="glyphicons glyphicons-binoculars"></span> View </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- sidebar resources -->
+
+        </ul>
+        <div class="sidebar-toggle-mini">
+            <a href="#">
+                <span class="fa fa-sign-out"></span>
+            </a>
+        </div>
+    </div>
+    <div class="nano-pane" style="display: block;">
+        <div class="nano-slider" style="height: 450px; transform: translate(0px, 0px);"></div>
+    </div>
+</aside>

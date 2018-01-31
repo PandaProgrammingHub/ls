@@ -1,0 +1,174 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+    <header id="topbar">
+       <div class="topbar-left">
+          <ol class="breadcrumb">
+             <li class="crumb-icon">
+                <a ui-sref="salesdashboard">
+                <span class="glyphicon glyphicon-home"></span>
+                </a>
+             </li>
+             <li class="crumb-link">
+                <a ui-sref="salesdashboard">Home</a>
+             </li>
+             <li class="crumb-trail">Sales Dashboard</li>
+          </ol>
+       </div>
+    </header>
+    <div class="panel p10">
+       <div class="panel-menu p12 theme-primary">
+          <div class="row">
+             <div class="col-md-4 col-sm-4 col-xs-6">
+                <div class="">
+                   <!-- <h4>
+                      <span class="fa fa-filter"></span> &nbsp Sales Manager:
+                      <span> XYZ</span>
+                   </h4> -->
+                   
+                    <span class="panel-title">Sales Manager List</span>
+                 
+                </div>
+             </div>
+             <div class="col-md-4 col-sm-4 col-xs-2">
+             </div>
+             <div class="col-md-4 col-sm-4 col-xs-4 anupam_admin4">
+                <div class="pull-right">
+                 <a ui-sref="school_create" style="margin-left: 5px;" class="btn btn-sm btn-primary btn-block" title="Add School">Add School</a>                       
+                </div>
+                <div class="pull-right">
+                    <button data-toggle="modal" data-target="#schoolSearchModal" ng-click="openSchoolSearch()" type="button" class="btn btn-sm btn-primary btn-block">Search</button>
+                </div>
+                </div>
+              <!-- School Search Modal pop-up -->
+            <div class="modal fade" id="schoolSearchModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">                        
+                           <div class="modal-header">
+                              <button type="button" class="close" ng-click="cancelSchoolSearch()" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">Search School</h4>
+                           </div>
+                           <div class="modal-body">
+                                <form id="schoolSerach" name="schoolSerachForm" ng-submit="schoolSerach(schoolSerachForm)">
+                                 <div class="row">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="inputStandard" class="col-md-3 control-label">Name</label>
+                                       <div class="col-md-8">
+                                          <input type="text" id="schoolname" name="schoolname" ng-model="school.name" class="form-control" placeholder="Enter School Name">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="inputStandard" class="col-md-3 control-label">School Code</label>
+                                       <div class="col-md-8">
+                                          <input type="text" id="schoolcode" name="schoolcode" ng-model="school.schoolcode" class="form-control" placeholder="Enter School Code">
+                                       </div>
+                                    </div>
+                                 </div> -->
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="inputStandard" class="col-md-3 control-label">Location</label>
+                                       <div class="col-md-8">
+                                          <input type="text" id="schoollocation" name="schoollocation" ng-model="school.location" class="form-control" placeholder="Enter School Location">
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row mt20">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                               <label for="inputStandard" class="col-md-3 control-label">Location PIN</label>
+                                               <div class="col-md-8">
+                                                  <input type="text" ng-pattern='/^(\d{6}(-\d{5})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/' id="schoollocationpin" name="schoollocationpin" ng-model="school.pincode" class="form-control"
+                                                     placeholder="Ente Zip code">
+                                                     <span class="error-message" ng-show="showMessage(schoolSerachForm.schoollocationpin)">Please enter valid Pincode.</span>
+                                                    </span>
+                                               </div>
+                                            </div>
+                                         </div>
+                                 <div class="col-md-6">
+                                    <div class="col-md-6">
+                                       <label for="inputStandard" class="control-label">Activation Status</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <!-- <input type="radio" ng-model="school.status" value="1">Dogs
+                                            <input type="radio" ng-model="school.status" value="2">Tutorials -->
+                                       <div class="radio-custom radio-success mb5">
+                                          <input type="radio" value='1' id="schoolActivate" name="schoolactivationstatus" ng-model="school.status">
+                                          <label for="schoolActivate">Active</label>
+                                       </div>
+                                       <div class="radio-custom radio-warning mb5">
+                                          <input type="radio" value='2' id="schoolInactivate" name="schoolactivationstatus" ng-model="school.status">
+                                          <label for="schoolInactivate">Inactive</label>
+                                       </div>
+                                    </div>
+                                 </div>                                
+                              </div>
+                                <button type="submit" class="btn btn-default center-block element_center" ng-click="$('#schoolSearchModal').modal('hide');">Search</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                
+                        </form>
+                    </div>
+                     </div>                 
+                </div>
+            </div>
+          </div>
+       </div>
+       <div class="panel-body pn" style="overflow: visible;">
+          <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+             aria-describedby="example_info" style="width: 100%;">
+             <thead>
+                <tr class="bg-light">
+                   <th>Name</th>
+                   <!-- <th>Code</th>  -->
+                   <th>Location</th>
+                   <th>Activation status</th>
+                   <th>Documents</th>
+                   <th>Payments</th>
+                   <th>Order status</th>
+                   <th>Acad status</th>
+                   <th>Admin</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr ng-repeat="schoolList in schoolLists">
+                   <td class="sorting_1">{{schoolList.name}}</td>
+                   <!-- <td>{{schoolList.code}}</td> -->
+                   <!-- <td>{{schoolList.location}}</td> -->
+                   <td>{{schoolList.city}}</td>
+                   <td class="center">
+                      <a href="javascript:void(0);" ng-class="{status_active: schoolList.school_status_id == '1', status_deactive: schoolList.school_status_id == '2'}" class="hidden-xs badge badge-system fs11 mr10">{{(schoolList.school_status_id == '1')?'Active':'Deactive'}}</a>
+                   </td>
+                   <td class="center">
+                      <a href="javascript:void(0);" class="hidden-xs badge badge-system fs11 mr10" ng-click="editDocument(schoolList.id,schoolList.name)">{{schoolList.documentstatus}}</a>
+                   </td>
+                   <td class="center">
+                      <a href="javascript:void(0);" class="hidden-xs badge badge-system fs11 mr10" ng-click="editPaymentList(schoolList.id,schoolList.name)">{{schoolList.paymentstatus}}</a>
+                   </td>
+                   <td class="center">
+                      <a href="javascript:void(0);"  ng-class="{status_pending: !schoolList.order_status}" class="hidden-xs badge badge-system fs11 mr10">{{(schoolList.order_status)?'Complete':'Pending'}}</a>
+                   </td>
+                   <td class="center">
+                      <a href="javascript:void(0);"  ng-class="{status_pending: !schoolList.acad_status}" class="hidden-xs badge badge-warning fs11 mr10">{{(schoolList.acad_status)?'Complete':'Pending'}}</a>
+                   </td>
+                   <td class="center">
+                      <div class="dropdown">
+                         <button class="dropbtn">Action</button>
+                         <div class="dropdown-content">
+                            <a href="javascript:void(0);" ng-click="editBasicProfile(schoolList.id,schoolList.name)">Edit Basic Profile</a>
+                            <a href="javascript:void(0);" ng-click="editClassConfiguration(schoolList.id,schoolList.name)">Edit Class configuration</a>
+                            <a href="javascript:void(0);" ng-click="editContentConfiguration(schoolList.id,schoolList.name)">Edit Content configuration</a>
+                            <a href="javascript:void(0);" ng-if="schoolList.school_status_id != '1'" ng-click="editActiveSchool(schoolList.id)">Active School</a>
+                            <a href="javascript:void(0);" ng-if="schoolList.school_status_id == '1'" ng-click="editDeactiveSchool(schoolList.id)">Deactive School</a>
+                            <a href="javascript:void(0);" ng-click="manageSchoolUsers(schoolList.id,schoolList.name)">Manage School Users</a> 
+                         </div>
+                      </div>
+                   </td>
+                </tr>
+             </tbody>
+          </table>
+       </div>
+    </div>
+    <!-- End: Content -->
+ </section>

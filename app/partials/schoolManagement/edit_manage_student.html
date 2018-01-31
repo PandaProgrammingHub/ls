@@ -1,0 +1,604 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="salesdashboard">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <!-- <a ui-sref="school_master">{{editstudentsDetails.sa[0].schoolname}}</a> -->
+                    <a ui-sref="school_master">{{schoolname}}</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="manage_students({schoolId:schoolId,schoolname:schoolname})">Manage Students</a>
+                </li>
+                <li class="crumb-trail">{{editstudentsDetails.firstname}} {{editstudentsDetails.middlename}} {{editstudentsDetails.lastname}}</li>
+            </ol>
+        </div>
+    </header>
+    <section id="content" class="pt5">
+
+        <div class="panel p10">
+            <div class="panel-menu theme-primary">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="">
+                            <h4>
+                                Edit Student
+                            </h4>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="panel-body pn" style="overflow: hidden;">
+                <div ng-app="MyApp">
+                    <div ng-controller="EditManagestudentsController">
+                        <form class="form-horizontal form_area" role="form" id="admin-form" ng-submit="editstudentBasicProfile(studentBasicProfileForm)"
+                            name="studentBasicProfileForm">
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Personal Info</p>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">First Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.firstname)?'state-error':''">
+                                                <input type="text" name="firstname" id="firstname" class="field prepend-icon form-control" ng-model="editstudentsDetails.firstname"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.firstname.$touched && studentBasicProfileForm.firstname.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.firstname)">Enter first name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Middle Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.middlename"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Last Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.lastname)?'state-error':''">
+                                                <input type="text" name="lastname" id="lastname" class="field prepend-icon form-control" ng-model="editstudentsDetails.lastname"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.lastname.$touched && studentBasicProfileForm.lastname.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.lastname)">Enter last name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Date of Birth</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.dateofbirth)?'state-error':''">
+                                                <div class="input-group date" id="datetimepicker2">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input name="dateofbirth" id="dateofbirth" type="date" class="form-control" ng-model="editstudentsDetails.dateofbirth" required>
+
+                                                </div>
+                                                <span ng-messages="(studentBasicProfileForm.dateofbirth.$touched && studentBasicProfileForm.dateofbirth.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.dateofbirth)">Enter your DOB.</span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.gender)?'state-error':''">
+                                                Gender:
+                                                <input name="gender" type="radio" ng-model="editstudentsDetails.gender" value="0" ng-required="!blank"> Male
+                                                <input name="gender" type="radio" ng-model="editstudentsDetails.gender" ng-value="1" ng-required="!blank"> Female
+                                                <span ng-messages="(studentBasicProfileForm.gender.$touched && studentBasicProfileForm.gender.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.gender)">Select gender.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Blood Group</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <select id="cluster" class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.bloodgroup" ng-options="bloodgroup.name as bloodgroup.name for bloodgroup in bloodgroup"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Address</p>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Address Line1</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.addressline1)?'state-error':''">
+                                                <input type="text" name="addressline1" id="addressline1" class="field prepend-icon form-control" ng-model="editstudentsDetails.addressline1"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.addressline1.$touched && studentBasicProfileForm.addressline1.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.addressline1)">Enter your address1.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Address Line2</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.addressline2)?'state-error':''">
+                                                <input type="text" name="addressline2" id="addressline2" class="field prepend-icon form-control" ng-model="editstudentsDetails.addressline2"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.addressline2.$touched && studentBasicProfileForm.addressline2.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.addressline2)">Enter your address2.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Address Line3</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.addressline3"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="pincode" class="col-lg-4 control-label">Pincode</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.pincode)?'state-error':''">
+                                                <input type="number" type="text" ng-blur="checkPinCode(editstudentsDetails.pincode)" name="pincode" id="pincode" ng-model="editstudentsDetails.pincode"
+                                                    class="field prepend-icon form-control" placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.pincode.$touched && studentBasicProfileForm.pincode.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.pincode)">Please enter pincode.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+
+                                            <label for="inputStandard" class="col-lg-4 control-label">City</label>
+                                            <div class="col-lg-8" ng-class="showMessage(studentBasicProfileForm.city)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="city" name="city" required class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.pincodeid"
+                                                        ng-options="pincodeDetails.id as pincodeDetails.city for pincodeDetails in pincodeDetails"></select>
+                                                    <span ng-messages="(studentBasicProfileForm.city.$touched && studentBasicProfileForm.city.$error)" role="alert">
+                                                        <span class="error-message" ng-show="showMessage(studentBasicProfileForm.city)">Please select city.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!-- <label class="col-lg-3 control-label">City</label>
+                                            <div class="col-lg-8" ng-class="showMessage(studentBasicProfileForm.city)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="city" ng-disabled="showCityState" name="city" ng-model="editstudentsDetails.pincodeid" class="field form-control"
+                                                        required>
+                                                        <option value="">City/District</option>
+                                                        <option ng-repeat="pincodeDetail in pincodeDetails " value="{{pincodeDetail.id}}">{{pincodeDetail.city}}</option>
+                                                        <input type="hidden" name="schoolid" ng-model="editstudentsDetails.pincodeid" ng-init="editstudentsDetails.pincodeid = pincodeDetail.id" />
+                                                    </select>
+                                                    <span ng-messages="(studentBasicProfileForm.city.$touched && studentBasicProfileForm.city.$error)" role="alert">
+                                                            <span class="error-message" ng-show="showMessage(studentBasicProfileForm.city)">Please select city.</span>
+                                                            </span>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">State</label>
+                                            <div class="col-lg-8" ng-class="showMessage(studentBasicProfileForm.state)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="state" ng-disabled="showCityState" name="state" ng-model="editstudentsDetails.state" class="field form-control"
+                                                        required>
+                                                        <!-- <option value="">State</option> -->
+                                                        <option ng-repeat="uniqueState in uniqueStates " value="{{uniqueState}}">{{uniqueState}}</option>
+                                                    </select>
+                                                    <span ng-messages="(studentBasicProfileForm.state.$touched && studentBasicProfileForm.state.$error)" role="alert">
+                                                        <span class="error-message" ng-show="showMessage(studentBasicProfileForm.state)">Please select state.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Fathers Information</p>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.fathersname)?'state-error':''">
+                                                <input type="text" name="fathersname" id="fathersname" class="field prepend-icon form-control" ng-model="editstudentsDetails.fathersname"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.fathersname.$touched && studentBasicProfileForm.fathersname.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.fathersname)">Enter your father's name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Phone</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="number" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.fathersphone"
+                                                    placeholder="" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Email</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="email" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.fathersemail"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Occupation</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.fathersoccuption"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                </div>
+                            </div>
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Mothers Information</p>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.mothersname)?'state-error':''">
+                                                <input type="text" name="mothersname" id="mothersname" class="field prepend-icon form-control" ng-model="editstudentsDetails.mothersname"
+                                                    placeholder="" required>
+                                                <span ng-messages="(studentBasicProfileForm.mothersname.$touched && studentBasicProfileForm.mothersname.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.mothersname)">Enter your mothe's name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Phone</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="number" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.mothersphone"
+                                                    placeholder="" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Email</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="email" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.mothersemail"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Occupation</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.mothersoccupation"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                </div>
+                            </div>
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Guardian's Information</p>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Name</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.guardiansname"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Phone</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="number" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.guardiansphone"
+                                                    placeholder="" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Email</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="email" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.guardiansemail"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Occupation</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon">
+                                                <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.guardiansoccupation"
+                                                    placeholder="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4 col-sm-4 col-xs-6">
+                                            <div class="form-group">
+                                                <label for="inputStandard" class="col-lg-4 control-label">Relationship</label>
+                                                <div class="col-lg-8 gui-input field prepend-icon">
+                                                    <input type="text" name="asm_name" id="asm_name" class="field prepend-icon form-control" ng-model="editstudentsDetails.guardiansrelationship"
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                        <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6"></div>
+                                </div>
+                            </div>
+                            <div class="section_cover mb10">
+                                <p class="section_title p10">Admission Information</p>
+                                <div class="form-group row">
+
+
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Admission Date</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.admissiondate)?'state-error':''">
+                                                <div class="input-group date" id="datetimepicker2">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input id="admissiondate" name="admissiondate" type="date" class="form-control" ng-model="editstudentsDetails.sa[0].admissiondate"
+                                                        required>
+
+
+                                                </div>
+                                                <span ng-messages="(studentBasicProfileForm.admissiondate.$touched && studentBasicProfileForm.admissiondate.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.admissiondate)">Enter admission date.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-3 control-label">Class</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date" ng-class="showMessage(schoolBasicProfileForm.regularclassid)?'state-error':''">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="regularclassid" name="regularclassid" required class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.sa[0].regularclassid"
+                                                        ng-options="regularclass.id as regularclass.name for regularclass in regularclass"></select>
+                                                    <span ng-messages="(studentBasicProfileForm.regularclassid.$touched && studentBasicProfileForm.regularclassid.$error)" role="alert">
+                                                        <span class="error-message" ng-show="showMessage(studentBasicProfileForm.regularclassid)">Select class name.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="form-group">
+                                            <label class="col-lg-3 control-label">Class</label>
+                                            <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.state)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="state" ng-disabled="showCityState" name="state" ng-model="editstudentsDetails.sa[0].regularclassid" class="field form-control"
+                                                        required>
+                                                        <option value="">Class</option>
+                                                        <option ng-repeat="regularclass in regularclass"  value="{{regularclass.id}}">{{regularclass.name}}</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-3 control-label">Division</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date" ng-class="showMessage(schoolBasicProfileForm.regulardivisionid)?'state-error':''">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="regulardivisionid" name="regulardivisionid" required class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.sa[0].regulardivisionid"
+                                                        ng-options="sectionDetails_regular.id as sectionDetails_regular.name for sectionDetails_regular in sectionDetails_regular"></select>
+                                                    <span ng-messages="(studentBasicProfileForm.regulardivisionid.$touched && studentBasicProfileForm.regulardivisionid.$error)"
+                                                        role="alert">
+                                                        <span class="error-message" ng-show="showMessage(studentBasicProfileForm.regulardivisionid)">Select division.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
+                                            <label class="col-lg-3 control-label">Division</label>
+                                            <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.state)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="state" ng-disabled="showCityState" name="state" ng-model="editstudentsDetails.sa[0].regulardivisionid" class="field form-control"
+                                                        required>
+                                                        <option value="">Division</option>
+                                                        <option ng-repeat="sectionDetails in sectionDetails" value="{{sectionDetails.id}}">{{sectionDetails.name}}</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group row">
+
+
+                                    <div class="col-md-4 col-sm-4 col-xs-6 pt10">
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-4 control-label">Status</label>
+                                            <div class="col-lg-8 gui-input field prepend-icon" ng-class="showMessage(studentBasicProfileForm.status)?'state-error':''">
+                                                <select id="status" name="status" required class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.sa[0].status"
+                                                    ng-options="country.id as country.name for country in status"></select>
+                                                <!--ng-init="editstudentsDetails.sa[0].status='600'" 
+                                                    <select id="cluster" class="gui-input field prepend-icon form-control" name="cluster">
+                                                    <option value="">Service</option>
+                                                    <option value="AL">A+</option>
+                                                    <option value="AL">B</option>
+                                                    <option value="AL">B+</option>
+                                                </select> -->
+                                                <span ng-messages="(studentBasicProfileForm.status.$touched && studentBasicProfileForm.status.$error)" role="alert">
+                                                    <span class="error-message" ng-show="showMessage(studentBasicProfileForm.status)">Select status.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-3 control-label">ELGA Level</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="elgastartclassid" name="elgastartclassid" class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.sa[0].elgastartclassid"
+                                                        ng-options="elgaclass.id as elgaclass.name for elgaclass in elgaclass"></select>
+                                                    <!-- ng-class="showMessage(schoolBasicProfileForm.elgastartclassid)?'state-error':''"
+                                                            <span ng-messages="(studentBasicProfileForm.elgastartclassid.$touched && studentBasicProfileForm.elgastartclassid.$error)" role="alert">
+                                                                <span class="error-message" ng-show="showMessage(studentBasicProfileForm.elgastartclassid)">Select ELGA Class.</span>
+                                                                </span> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <div class="form-group">
+                                            <label class="col-lg-3 control-label">ELGA Level</label>
+                                            <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.state)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="elevel1"  name="elevel1" ng-model="editstudentsDetails.sa[0].elgastartclassid" class="field form-control"
+                                                        required>
+                                                        <option value="">ELGA Level</option>
+                                                        <option ng-repeat="elgaclass in elgaclass" value="{{elgaclass.id}}">{{elgaclass.name}}</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+
+
+
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+
+                                        <div class="form-group">
+                                            <label for="inputStandard" class="col-lg-3 control-label">ELGA Division</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="elgastartdivisionid" name="elgastartdivisionid" class="gui-input field prepend-icon form-control" ng-model="editstudentsDetails.sa[0].elgastartdivisionid"
+                                                        ng-options="sectionDetails_elga.id as sectionDetails_elga.name for sectionDetails_elga in sectionDetails_elga"></select>
+                                                    <!-- <span ng-messages="(studentBasicProfileForm.elgastartdivisionid.$touched && studentBasicProfileForm.elgastartdivisionid.$error)" role="alert">
+                                                                <span class="error-message" ng-show="showMessage(studentBasicProfileForm.elgastartdivisionid)">Select ELGA Division.</span>
+                                                                </span> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--ng-class="showMessage(schoolBasicProfileForm.elgastartdivisionid)?'state-error':''"
+                                             <div class="form-group">
+                                            <label class="col-lg-3 control-label">ELGA Division</label>
+                                            <div class="col-lg-8" ng-class="showMessage(schoolBasicProfileForm.state)?'state-error':''">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon cursor">
+                                                        <i class="fa fa-home"></i>
+                                                    </span>
+                                                    <select id="state" name="state" ng-model="editstudentsDetails.sa[0].elgastartdivisionid" class="form-control"
+                                                        required>
+                                                        <option selected>ELGA Division</option>
+                                                        <option ng-repeat="sectionDetails in sectionDetails"  value="{{sectionDetails.id}}"
+                                                        >{{sectionDetails.name}}</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="panel-footer text-right">
+                                <div class="col-md-2 center-block">
+                                    <button type="submit" class="btn button btn-primary"> Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

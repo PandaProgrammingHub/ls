@@ -1,0 +1,280 @@
+<!-- Start: Content-Wrapper -->
+
+
+<section id="content_wrapper">
+
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a ui-sref="salesdashboard">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="salesdashboard">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                        <a ui-sref="school_basic_profile({schoolId:schoolId,schoolname:schoolname})">{{schoolname}}</a>                        
+
+                </li>
+
+                <li class="crumb-trail">School Content Config</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel-menu p12 admin-form theme-primary">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="">
+                    <h4>
+                        School Content Config
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <form class="form-horizontal" method="post" ng-submit="contentConfig(contentConfigForm)" id="contentConfigForm" name="contentConfigForm" novalidate>
+                
+        <div class="row">
+            <div class="col-md-6 form-horizontal">
+                <div class="col-md-3 form-group">
+                    <label for="inputStandard" class="control-label">School Board</label>
+                </div>
+                <div class="col-md-6 section">
+                    <label class="field select" ng-class="showMessage(contentConfigForm.schoolBoard)?'state-error':''">
+                        <select id="schoolBoard" required ng-model="contentconfig.schoolBoard" name="schoolBoard" ng-options="boardMaster.id as boardMaster.name for boardMaster in boardMasters">
+                           <option value="">Select Board</option>
+                            <!-- <option ng-repeat="boardMaster in boardMasters " value="{{boardMaster.id}}">{{boardMaster.name}}</option>                                                             -->
+                            
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-block mb25">
+            <ul class="nav nav-tabs tabs-border">
+                <li class="active">
+                    <a href="javascript:void(0);" data-target="#regular" data-toggle="tab">Regular Classes</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-target="#elga" data-toggle="tab">ELGA Classes</a>
+
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="regular" class="tab-pane active">
+                    <div class="row myscroll">
+                        <div class="col-md-6">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Subject</th>
+                                                <th class="text-center">Unit Sequence Version</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="contentConfigRegularClasses in contentConfigRegularClassesArray | limitTo:5">
+                                                        <td class="text-center">
+        
+                                                            <label >
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse"  name="name" ng-checked="contentConfigRegularClasses.checked" ng-model="contentConfigRegularClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeRegularClasses(contentConfigRegularClasses)">
+                                                                <b class="pr10" ng-model="contentConfigRegularClasses.name">{{contentConfigRegularClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                                <select id="subject_id" ng-model="contentConfigRegularClasses.subject_id"   class="form-control" name="subject_id">
+                                                                    <option ng-repeat="subject in contentConfigRegularClasses.subjects " value="{{subject.sub_id}}">{{subject.sub_name}}</option>                                                            
+                                                            </select>       
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                            <select id="unit_sequence_id" ng-model="contentConfigRegularClasses.unit_sequence_id"   class="form-control" name="unit_sequence_id">
+                                                                    <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option>                                                            
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Subject</th>
+                                                <th class="text-center">Unit Sequence Version</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="contentConfigRegularClasses in contentConfigRegularClassesArray | limitTo:4: 5">
+                                                        <td class="text-center">
+        
+                                                            <label >
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="contentConfigRegularClasses.checked" ng-model="contentConfigRegularClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeRegularClasses(contentConfigRegularClasses)">
+                                                                <b class="pr10" ng-model="contentConfigRegularClasses.name">{{contentConfigRegularClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                                <select id="subject_id" ng-model="contentConfigRegularClasses.subject_id"   class="form-control" name="subject_id">
+                                                                    <option ng-repeat="subject in contentConfigRegularClasses.subjects " value="{{subject.sub_id}}">{{subject.sub_name}}</option>                                                            
+                                                                </select>        
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                            <select id="unit_sequence_id" ng-model="contentConfigRegularClasses.unit_sequence_id"   class="form-control" name="unit_sequence_id">
+                                                                    <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option>                                                            
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="elga" class="tab-pane">
+                    <div class="row myscroll">
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Unit Sequence Version</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="contentConfigElgaClasses in contentConfigElgaClassesArray | limitTo:8">
+                                                        <td class="text-center">
+        
+                                                            <label >
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name"  ng-checked="contentConfigElgaClasses.checked" ng-model="contentConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(contentConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="contentConfigElgaClasses.name">{{contentConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+        
+                                                            <select id="unit_sequence_id" ng-model="contentConfigElgaClasses.unit_sequence_id"  class="form-control" name="unit_sequence_id">
+                                                                <option ng-repeat="n in range(1,10)" value="{{$index+1}}">{{$index+1}}</option>
+                                                            </select>
+        
+                                                        </td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Unit Sequence Version</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="contentConfigElgaClasses in contentConfigElgaClassesArray | limitTo:8:8">
+                                                        <td class="text-center">
+        
+                                                            <label >
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="contentConfigElgaClasses.checked" ng-model="contentConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(contentConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="contentConfigElgaClasses.name">{{contentConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+        
+                                                            <select id="unit_sequence_id" ng-model="contentConfigElgaClasses.unit_sequence_id"  class="form-control" name="unit_sequence_id">
+                                                                <option ng-repeat="n in range(1,10)" value="{{$index+1}}">{{$index+1}}</option>
+                                                            </select>
+        
+                                                        </td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Unit Sequence Version</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="contentConfigElgaClasses in contentConfigElgaClassesArray | limitTo:8:16">
+                                                        <td class="text-center">
+        
+                                                            <label >
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="contentConfigElgaClasses.checked" ng-model="contentConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(contentConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="contentConfigElgaClasses.name">{{contentConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+        
+                                                            <select id="unit_sequence_id" ng-model="contentConfigElgaClasses.unit_sequence_id"  class="form-control" name="unit_sequence_id">
+                                                                <option ng-repeat="n in range(1,10)" value="{{$index+1}}">{{$index+1}}</option>
+                                                            </select>
+        
+                                                        </td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt10 mb10">
+            <div class="row">
+                <div class="col-md-1 center-block">
+                    <input type="submit" class="center-block button btn btn-sm btn-hover btn-primary text-center" value="Submit">
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+    <!-- End: Content -->
+
+</section>

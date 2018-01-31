@@ -1,0 +1,170 @@
+.form_label select {
+    border: 1px solid #DDD;
+}
+.orange_btn {
+  background:#f26522;
+}
+.orange_btn:hover {
+  background:#f26522;
+}
+.orange_btn:focus {
+  background:#f26522;
+}
+.table tbody tr:nth-child(odd){
+  background-color: #f5f5f5;
+  /*color: #fff;*/
+}
+.admin-form.add_template .panel-heading {
+    padding: 0 8px;
+}
+
+.admin-form.add_template .panel-title {
+    font-size: 14px;
+}
+
+.new_checkbox.checkbox-custom input[type=checkbox]:checked + label:after, .new_checkbox.checkbox-custom input[type=radio]:checked + label:after {
+    top: 4px;
+    left: 5px;
+    transform: rotate(0deg);
+}
+.admin-form .green input:checked + .checkbox, .admin-form .green input:checked + .radio {
+    border: 3px solid #70ca63;
+}
+.admin-form .green .radio:before {
+    background: #70ca63 !important;
+}
+.admin-form .red input:checked + .checkbox, .admin-form .red input:checked + .radio {
+    border: 3px solid #e9573f;
+}
+.admin-form .red .radio:before {
+    background: #e9573f !important;
+}
+.admin-form .file.append-button.orange_btn .button {
+    left: 0;
+    right: auto;
+    height: 38px;
+    top: 0;
+    background: #a5a2a2;
+}
+.new_checkbox {
+    width: auto;
+    /*float: left;*/
+}
+span.required_star {
+    color: red;
+}
+
+.brb {
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.form_subtitle {
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.1;
+    text-rendering: optimizelegibility;
+    background-color: white;
+    font-size: 14px;
+    color: #000000;
+}
+
+ul.ng-scope {
+    padding: 0;
+}
+ul.ng-scope li {
+    list-style: none;
+}
+.align_c {
+	text-align: center;
+}
+span.glyphicons.glyphicons-download.custom_icon {
+	margin-right: 8px;
+	font-size: 21px;
+}
+.wid90 {
+	width: 90px;
+}
+.table.tbl_at > thead > tr > th {
+	vertical-align: top;
+}
+.table.tbl_at > tbody > tr > td {
+	vertical-align: top;
+	word-break: break-all;
+}
+.edit_btn {
+	background: #1c7fd0;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+.up_file input[type="file"]:after {
+    background: #f47d35;
+    width: 84px;
+    height: 33px;
+    float: left;
+    content: "";
+}
+.admin-form .file .button.up_btn {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    float: none;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 16px;
+    z-index: 10;
+}
+.admin-form .up_file .gui-input {
+    height: 30px;
+}
+.up_file {
+    width: 300px;
+}
+.admin-form .up_file .prepend-icon .field-icon {
+    top: 0;
+    z-index: 4;
+    width: 39px;
+    height: 30px;
+    color: inherit;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+    pointer-events: none;
+}
+
+
+
+
+
+@media screen and (max-width: 800px) {
+	#flip-scroll td {
+	    height: 50px !important;
+	}
+	#flip-scroll th {
+	    height: 50px;
+	    box-shadow: 1px 0px 0px #ccc;
+	}
+		#flip-scroll tfoot {
+	    display: none;
+	}
+	#flip-scroll th {
+	    border-bottom: 0;
+	    border-left: 0;
+	    font-weight: 600;
+	}
+	#flip-scroll table:after {
+	    content: "Scroll Left to Right for data view >>";
+	    width: 100%;
+	    text-align: center;
+	    display: inline-block;
+	    color: red;
+	    margin-top: 5px;
+	}
+
+
+}

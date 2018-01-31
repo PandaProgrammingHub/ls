@@ -1,0 +1,284 @@
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a href="index.html">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="index.html">Students</a>
+                </li>
+                <li class="crumb-trail">Promote Students</li>
+            </ol>
+        </div>
+    </header>
+    <div class="admin-form theme-primary add_template">
+
+        <div id="p1" class="panel panel-primary">
+
+            <div class="panel-body bg-light">
+                <form ng-submit="communication_form()">
+                    <!-- .section-divider -->
+
+                    <!-- Basic Inputs -->
+
+                    <!-- Input Icons -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="section">
+                                <label class="field">
+                                    <input type="text" name="firstname" class="gui-input" placeholder="Name" ng-model="communication.name">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="section">
+                                <label class="field select">
+                                    <select id="country" name="country" ng-model="communication.module">
+                                        <option value="">Select Module</option>
+                                        <option value="onboard">Onboarding</option>
+                                        <option value="result">Result</option>
+                                        <option value="holiday">Holiday</option>
+                                        <option value="attendance">Attendance</option>
+                                    </select>
+                                    <i class="arrow"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="section">
+                                <label class="field">
+                                    <input type="text" name="from" id="from" class="gui-input" placeholder="Description" ng-model="communication.description">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel mb25 mt5">
+                        <div class="panel-heading">
+                            <span class="panel-title">Create Notifications</span>
+                            <ul class="nav panel-tabs-border panel-tabs">
+                                <li class="active">
+                                    <a href="#tab1_1" class="link" data-toggle="tab">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#tab1_2" class="link" data-toggle="tab">Email</a>
+                                </li>
+                                <li>
+                                    <a href="#tab1_3" class="link" data-toggle="tab">SMS</a>
+                                </li>
+                                <li>
+                                    <a href="#tab1_4" class="link" data-toggle="tab">Other Notifications</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="panel-body p25 pb5">
+                            <div class="tab-content pn br-n admin-form">
+                                <div id="tab1_1" class="tab-pane active">
+
+                                    <!-- end section -->
+
+                                    <div class="section row">
+                                        <div class="col-sm-6 pl15 mb15" ng-model="communication.setting_option">
+
+                                            <div class="checkbox-custom new_checkbox checkbox-warning mb5 mr15">
+                                                <input type="checkbox" checked="" id="email" ng-model="communication.setting_email">
+                                                <label for="email">Email</label>
+                                            </div>
+                                            <div class="checkbox-custom new_checkbox checkbox-warning mb5 mr15">
+                                                <input type="checkbox" checked="" id="sms" ng-model="communication.setting_sms">
+                                                <label for="sms">SMS</label>
+                                            </div>
+                                            <div class="checkbox-custom new_checkbox checkbox-warning mb5 mr15">
+                                                <input type="checkbox" checked="" id="other_notification" ng-model="communication.setting_othernotification">
+                                                <label for="other_notification">Other Notifications</label>
+                                            </div>
+                                        </div>
+                                        <!-- end section -->
+                                        <div class="col-sm-6 pl15">
+                                            <div class="section">
+                                                <label class="field prepend-icon append-button orange_btn file">
+                                                    <span class="button btn-primary">Choose File</span>
+                                                    <input type="file" class="gui-file" name="file1" id="file1" onchange="document.getElementById('uploader1').value = this.value;"
+                                                        ng-model="communication.setting_file">
+                                                    <input type="text" class="gui-input" id="uploader1" placeholder="Please Select A File">
+                                                    <label class="field-icon">
+                                                        <i class="fa fa-upload"></i>
+                                                    </label>
+                                                </label>
+
+                                                <!-- <input type="file" file-model="myFile" ng-model="communication.file_upload">
+                                                        <button ng-click="uploadFile()">upload me</button> -->
+                                            </div>
+                                        </div>
+                                        <!-- end section -->
+
+                                        <!-- end section -->
+                                        <!-- end .col8 section -->
+
+                                    </div>
+
+                                    <!-- <div class="section row mbn">
+                                            <div class="col-sm-12">
+                                                <p class="text-center">
+                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                </p>
+                                            </div>
+                                        </div> -->
+                                    <!-- end section -->
+
+                                </div>
+                                <div id="tab1_2" class="tab-pane">
+
+                                    <!-- end section -->
+
+                                    <div class="section row">
+                                        <div class="col-md-12 mb15">
+                                            <label for="zip" class="field">
+                                                Subject
+                                            </label>
+                                        </div>
+                                        <div class="col-md-12 mb15">
+                                            <label for="zip" class="field">
+                                                <input type="text" name="zip" id="zip" class="gui-input" placeholder="Subject" ng-model="communication.email_subject">
+                                            </label>
+                                        </div>
+                                        <!-- end section -->
+
+                                        <div class="col-md-12 mb15">
+                                            <label for="city" class="field">
+                                                Content
+                                            </label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="city" class="field">
+                                                <!-- <input type="text" name="city" id="city" class="gui-input" placeholder="Content" ng-model="communication.email_content"> -->
+                                                <textarea class="form-control textarea-grow" id="textArea1" rows="4" ng-model="communication.email_content"></textarea>
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <!--<div class="section row mbn">
+                                        <div class="col-sm-8">
+                                            <div class="section">
+                                                <label class="field option green">
+                                                    <input type="radio" value="0" name="email_activation" checked ng-model="communication.email_isactive">
+                                                    <span class="radio"></span>Active</label>
+                                                <label class="field option red">
+                                                    <input type="radio" value="1" name="email_activation" ng-model="communication.email_isactive">
+                                                    <span class="radio"></span>Inactive</label>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-12">
+                                                <p class="text-center">
+                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                </p>
+                                            </div>
+                                    </div> -->
+                                    <!-- end section -->
+
+                                </div>
+                                <div id="tab1_3" class="tab-pane">
+
+                                    <!-- end section -->
+
+                                    <div class="section row">
+                                        <div class="col-md-12">
+                                            <label for="city" class="field">
+                                                <input type="text" name="city" id="city" class="gui-input" placeholder="Content" ng-model="communication.sms_content">
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="section row mbn">
+                                        <div class="col-sm-8">
+                                            <div class="section">
+                                                <label class="field option green">
+                                                    <input type="radio" name="sms_activation" ng-model="communication.sms_isactive" checked>
+                                                    <span class="radio"></span>Active</label>
+                                                <label class="field option red">
+                                                    <input type="radio" name="sms_activation" ng-model="communication.sms_isactive">
+                                                    <span class="radio"></span>Inactive</label>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-12">
+                                                <p class="text-center">
+                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                </p>
+                                            </div> -->
+                                    </div>
+                                    <!-- end section -->
+
+                                </div>
+                                <div id="tab1_4" class="tab-pane">
+
+                                    <!-- end section -->
+
+                                    <div class="section row">
+                                        <div class="col-md-4 mb15">
+                                            <label for="zip" class="field">
+                                                <input type="text" name="zip" id="zip" class="gui-input" placeholder="Subject" ng-model="notification_android_subject">
+                                            </label>
+                                        </div>
+                                        <!-- end section -->
+
+                                        <div class="col-md-8">
+                                            <label for="city" class="field">
+                                                <input type="text" name="city" id="city" class="gui-input" placeholder="Content" ng-model="notification_android_content">
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="section row mbn">
+                                        <div class="col-sm-8">
+                                            <div class="section">
+                                                <label class="field option green">
+                                                    <input type="radio" name="other_activation" ng-model="communication.notification_isactive" checked>
+                                                    <span class="radio"></span>Active</label>
+                                                <label class="field option red">
+                                                    <input type="radio" name="other_activation" ng-model="communication.notification_isactive">
+                                                    <span class="radio"></span>Inactive</label>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-12">
+                                                <p class="text-center">
+                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                </p>
+                                            </div> -->
+                                    </div>
+                                    <!-- end section -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-12">
+                        <p class="text-center">
+                            <input class="btn btn-primary" type="submit" value="Submit">
+                        </p>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    <!-- End: Content -->
+</section>
+<script>
+    $('.link').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
+    });
+</script>

@@ -1,0 +1,200 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">School Master</li>
+                <li class="crumb-trail">Role</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage School Role
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="editor_create btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addRoleModal">
+                            <span class="glyphicons glyphicons-circle_plus"></span> Add Role</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add Modal -->
+            <div class="modal fade" id="addRoleModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelRole()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Role</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="addRoleForm" role="form" ng-submit="addRoleDetails(addRoleForm)" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Role Name:</label>
+                                            <input type="text" class="form-control v-form-control" name="role_name" ng-model="addRoleData.role_name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                                required autocomplete="off" placeholder="Role Name" id="role_name">
+                                            <span ng-messages="((addRoleForm.role_name.$touched && addRoleForm.role_name.$error) || (addRoleForm.$submitted && addRoleForm.role_name.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid role name.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Role Type:</label>
+                                            <input type="text" class="form-control v-form-control" name="role_type" ng-model="addRoleData.role_type" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Role Type" id="role_type">
+                                            <span ng-messages="((addRoleForm.role_type.$touched && addRoleForm.role_type.$error) || (addRoleForm.$submitted && addRoleForm.role_type.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid role type.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label ng-repeat="permission in permissions" class="checkbox_space">
+                                        <input type="checkbox" class="checkbox_align" checklist-model="permissions_ids" checklist-value="permission.id"> {{permission.name}}
+                                    </label>
+                                </div>
+                                <button type="submit" class="editor_create btn btn-primary center-block element_center">
+
+                                    Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editRoleModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelRole()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Role</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="editRoleForm" role="form" ng-submit="editRoleDetails(editRoleForm)" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Role Name:</label>
+                                            <input type="text" class="form-control v-form-control" name="name" ng-model="roleDetailsByid.role_name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                                required autocomplete="off" placeholder="Role Name" id="name">
+                                            <span ng-messages="((editRoleForm.name.$touched && editRoleForm.name.$error) || (editRoleForm.$submitted && editRoleForm.name.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid role name.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Role Type:</label>
+                                            <input type="text" class="form-control v-form-control" name="type" ng-model="roleDetailsByid.role_type" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                                required autocomplete="off" placeholder="Role type" id="type">
+                                            <span ng-messages="((editRoleForm.type.$touched && editRoleForm.type.$error) || (editRoleForm.$submitted && editRoleForm.type.$error))"
+                                                role="alert">
+                                                <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                <span class="error_msg" ng-message="pattern">Please enter valid role type.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label ng-repeat="permission in permissions" class="checkbox_space">
+                                            <input type="checkbox" class="checkbox_align" checklist-model="permissions_ids" checklist-value="permission.id"> {{permission.name}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                    Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Edit Modal End-->
+
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info">
+                <thead>
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Role Name</th>
+                        <th class="">Role Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center" rowspan="1" colspan="1">Delete</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Class Name</th>
+                        <th class="">Class Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr id="row_1" role="row" class="odd" ng-repeat="role in roleDetails">
+                        <!-- <td class="text-center sorting_1">{{role.id}}</td> -->
+                        <td class="">{{role.role_name}}</td>
+                        <td class="">{{role.role_type}}</td>
+                        <td class="text-center">{{role.created_at | date : "y-MM-dd"}}</td>
+                        <td class="text-center cursor">
+                            <a ng-click="getRoleDetailsByID(role.id)" data-toggle="modal" data-target="#editRoleModal" class="text-center editor_edit curosor">Edit</a>
+                        </td>
+                        <td class="text-center cursor">
+                            <a ng-click="deleteRoleDetails(role.id)" class="text-center editor_edit cursor">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="notification_popup">Role Name already exist.</div>
+        </div>
+    </div>
+</section>

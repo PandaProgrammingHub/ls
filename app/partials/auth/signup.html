@@ -1,0 +1,141 @@
+
+  <!-- Start: Content-Wrapper -->
+  <section id="content_wrapper">
+
+    <!-- begin canvas animation bg -->
+    <div id="canvas-wrapper">
+      <canvas id="demo-canvas"></canvas>
+    </div>
+
+
+    <!-- Begin: Content -->
+    <section id="content">
+
+      <div class="admin-form theme-info" id="login1">
+
+        <div class="row mb15 table-layout">
+
+          <div class="col-xs-6 va-m pln">
+            <a ui-sref="dashboard" title="Return to Dashboard">
+              <img src="../assets/img/logos/logo_white.png" title="AdminDesigns Logo" class="img-responsive w250">
+            </a>
+          </div>
+
+          <div class="col-xs-6 text-right va-b pr5">
+            <div class="login-links">
+              <a ui-sref="login" class="active" title="Login">Login</a>
+              <!-- <span class="text-white"> | </span> -->
+              <!-- <a ui-sref="signup" class="" title="New Login Register">Register</a> -->
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="panel panel-info mt10 br-n ">
+          <div class="panel-heading heading-border bg-white">
+
+          </div>
+          <!-- end .form-header section -->
+          <form method="post" ng-submit="signup(signupForm)" id="signupForm" name="signupForm" novalidate>
+            <div class="bg-light panel-body bg-light">
+
+              <div class="mt10 mb10">
+                <h3 style="text-align:center">Register New Account</h3>
+              </div>
+              <!-- .section-divider -->
+
+              <div class="section">
+                <label for="fullname" class="field-label text-muted fs18 mb10">Full Name</label>
+                <label for="fullname" class="field prepend-icon" ng-class="showMessage(signupForm.fullname)?'state-error':''">
+                  <input type="text" name="fullname" id="fullname" class="gui-input form-control" ng-model="user.name"
+                         placeholder="Enter Your Full Name" required>
+                  <label for="fullname" class="field-icon">
+                    <i class="fa fa-user"></i>
+                  </label>
+                  <span ng-messages="(signupForm.fullname.$touched && signupForm.fullname.$error)" role="alert">
+                    <span class="error-message" ng-show="showMessage(signupForm.fullname)">Please enter Full name.</span>
+                  </span>
+                </label>
+              </div>
+
+              <!-- end .section row section -->
+
+              <div class="section">
+                <label for="mobile_phone" class="field-label text-muted fs18 mb10">Mobile Number</label>
+                <label for="mobile_phone" class="field prepend-icon" ng-class="showMessage(signupForm.mobile_phone)?'state-error':''">
+                  <input type="number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" onKeyDown="if(this.value.length==10 && event.keyCode!=8) return false;"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" name="mobile_phone" id="mobile_phone" class="gui-input form-control"
+                         ng-model="user.mobile" placeholder="Mobile Number" required>
+                  <label for="mobile_phone" class="field-icon">
+                    <i class="fa fa-phone"></i>
+                  </label>
+                  <span ng-messages="(signupForm.mobile_phone.$touched && signupForm.mobile_phone.$error)" role="alert">
+                    <span class="error-message" ng-show="showMessage(signupForm.mobile_phone)">Please enter valid Mobile Number.</span>
+                  </span>
+                </label>
+              </div>
+              <!-- end section -->
+
+              <div class="section">
+                <label for="email" class="field-label text-muted fs18 mb10">Email Address</label>
+                <label for="email" class="field prepend-icon" ng-class="showMessage(signupForm.email)?'state-error':''">
+                  <input type="email" name="email" id="email" class="gui-input form-control" ng-model="user.email"
+                         placeholder="Email Address" required>
+                  <label for="email" class="field-icon">
+                    <i class="fa fa-envelope"></i>
+                  </label>
+                  <span ng-messages="(signupForm.email.$touched && signupForm.email.$error)" role="alert">
+                    <span class="error-message" ng-show="showMessage(signupForm.email)">Please enter Email.</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="section">
+                <label for="password" class="field-label text-muted fs18 mb10">Password</label>
+                <label for="password" class="field prepend-icon" ng-class="showMessage(signupForm.password)?'state-error':''">
+                  <input type="password" name="password" id="password" class="gui-input form-control"
+                         ng-model="user.password" placeholder="Create a password" required>
+                  <label for="password" class="field-icon">
+                    <i class="fa fa-unlock-alt"></i>
+                  </label>
+                  <span ng-messages="(signupForm.password.$touched && signupForm.password.$error)" role="alert">
+                    <span class="error-message" ng-show="showMessage(signupForm.password)">Please enter Password.</span>
+                  </span>
+                </label>
+              </div>
+              <!-- end section -->
+
+              <div class="section">
+                <label for="username" class="field-label text-muted fs18 mb10">Retype Password</label>
+                <label for="confirmPassword" class="field prepend-icon" ng-class="showMessage(signupForm.confirmPassword)?'state-error':''">
+                  <input type="password" name="confirmPassword" id="confirmPassword" class="gui-input form-control"
+                         ng-model="user.confirmPassword" compare-to="user.password" placeholder="Retype your password" required>
+                  <label for="confirmPassword" class="field-icon">
+                    <i class="fa fa-lock"></i>
+                  </label>
+                  <span ng-messages="(signupForm.confirmPassword.$touched && signupForm.confirmPassword.$error)" role="alert">
+                    <span class="error-message" ng-show="showMessage(signupForm.confirmPassword)">Passwords don't match.</span>
+                  </span>
+                </label>
+              </div>
+              <!-- end section -->
+              <div class=" bg-light text-danger text-center error-message" ng-if="errorMessage">{{errorMessage}}</div>
+            </div>
+            <div class="panel-footer">
+              <div class="col-md-4 center-block">
+                <input type="submit" class="button btn btn-hover btn-primary text-center" value="Create Account">
+              </div>
+            </div>
+        </div>
+
+        <!-- end .form-footer section -->
+        </form>
+      </div>
+</div>
+
+</section>
+<!-- End: Content -->
+
+</section>
+<!-- End: Content-Wrapper -->
+

@@ -1,0 +1,147 @@
+<section id="content_wrapper">
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="class_teacherMapping({schoolId:schoolId, schoolname:schoolname})">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">Class Teacher Mapping</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel p10">
+
+            <div class="panel-menu theme-primary">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-4 col-xs-6">
+                        <div class="">
+                            <h4>
+                                Class Teacher Mapping
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-body pn" style="overflow: hidden;">
+
+                <div class="row">
+                    <div class="col-md-6 pl20 pt10 pb10">
+                        <table class="table border-space admin-form theme-warning tc-checkbox-1 fs13 dataTable">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th class="">Class</th>
+                                    <th class="">Division</th>
+                                    <th class="">Class Teacher</th>
+                                    <th class="">Time table</th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th class="">Class</th>
+                                    <th class="">Division</th>
+                                    <th class="">Class Teacher</th>
+                                    <th class="">Time table</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr class="odd" ng-repeat="classteacher in left">
+                                    <td class="">{{classteacher.class.name}}</td>
+                                    <td class="">{{classteacher.division.name}}</td>
+                                    <td class="">
+                                        <label class="field select">
+                                            <select ng-change="submitTeacherName(selectedTeacher.id, classteacher.id)" ng-model="selectedTeacher.id">
+                                                <option value="">{{classteacher.classTeacher.name}}</option>
+                                                <option ng-repeat="selectedTeacher in classTeacherList" ng-value="{{selectedTeacher.id}}">{{selectedTeacher.name}}</option>
+                                            </select>
+                                            <i class="arrow double"></i>
+                                        </label>
+                                    </td>
+                                    <td class="">
+                                        <div style="display: inline-flex;">
+                                            <span class="field prepend-icon file">
+                                                <span class="hidden-xs badge badge-system fs11 mr10 ng-binding">Upload</span>
+                                                <input type="file" class="gui-file" name="file1" id="file1" onchange="uploadFile($files,classteacher.id)" accept=".pdf">
+                                            </span>
+                                            <!-- <span class="field prepend-icon file">
+                                                <span class="hidden-xs badge badge-system fs11 mr10 ng-binding cursor">Downlad</span>
+                                                <input type="file" class="gui-file" name="file1" id="file1" onchange="uploadFile($files,classteacher.id)" accept=".pdf">
+                                            </span> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6 pr20 pt10 pb10">
+                        <table class="table border-space admin-form theme-warning tc-checkbox-1 fs13 dataTable">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th class="">Class</th>
+                                    <th class="">Division</th>
+                                    <th class="">Class Teacher</th>
+                                    <th class="">Time table</th>
+                                </tr>
+                            </thead>
+
+                            <tfoot>
+                                <tr>
+                                    <th class="">Class</th>
+                                    <th class="">Division</th>
+                                    <th class="">Class Teacher</th>
+                                    <th class="">Time table</th>
+                                </tr>
+                            </tfoot>
+
+                            <tbody>
+                                <tr class="odd" ng-repeat="classteacher in right">
+                                    <td class="">{{classteacher.class.name}}</td>
+                                    <td class="">{{classteacher.division.name}}</td>
+                                    <td class="">
+                                        <label class="field select">
+                                            <select ng-change="submitTeacherName(selectedTeacher.id, classteacher.id)" ng-model="selectedTeacher.id">
+                                                <option value="">{{classteacher.classTeacher.name}}</option>
+                                                <option ng-repeat="selectedTeacher in classTeacherList" ng-value="{{selectedTeacher.id}}">{{selectedTeacher.name}}</option>
+                                            </select>
+                                            <i class="arrow double"></i>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div style="display: inline-flex;">
+                                            <label class="field prepend-icon file">
+                                                <span class="hidden-xs badge badge-system fs11 mr10 ng-binding">Upload
+                                                </span>
+                                                <input type="file" class="gui-file" name="file2" id="file2" onchange="uploadFile($files,classteacher.id)" accept=".pdf">
+                                            </label>
+                                            <!-- <span class="field prepend-icon file">
+                                                <span class="hidden-xs badge badge-system fs11 mr10 ng-binding cursor">Downlad</span>
+                                                <input type="file" class="gui-file" name="file1" id="file1" onchange="uploadFile($files,classteacher.id)" accept=".pdf">
+                                            </span> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

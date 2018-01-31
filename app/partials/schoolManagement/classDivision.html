@@ -1,0 +1,143 @@
+<section id="content_wrapper">
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="subject_teacherMapping({schoolId:schoolId, schoolname:schoolname})">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">Class Division Management</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary admin-form">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6 mb20">
+                    <div class="">
+                        <h4>
+                            Class Division Management
+                        </h4>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+
+            </div>
+            <div class="row">
+                <form method="get" name="Schoolsubjectform" ng-submit="classDivisionFilter()">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="pn col-md-3 col-sm-3 col-xs-3">
+                            <label class="field select">
+                                <input type="text" class="field prepend-icon form-control" placeholder="Name" ng-model="classDivisionDetail.sfirstname">
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <select ng-model="selectClassDivision.id" ng-change="getDivision(selectClassDivision.id)">
+                                    <option value="">Class</option>
+                                    <option ng-repeat="selectClassDivision in classDivisionDetail" ng-value="selectClassDivision.id">{{selectClassDivision.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <select ng-model="selectedDivision.id">
+                                    <option value="">Division</option>
+                                    <option ng-repeat="selectedDivision in divisionList" ng-value="selectedDivision.id">{{selectedDivision.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-sm btn-dark btn-block">
+                                <span class="glyphicons glyphicons-filter"></span> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info" style="width: 100%;">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="">SR</th>
+                        <th class="">Name</th>
+                        <th class="">Regular Class</th>
+                        <th class="">Regular Div</th>
+                        <th class="">Elga Class</th>
+                        <th class="">Elga Div</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th class="">SR</th>
+                        <th class="">Name</th>
+                        <th class="">Regular Class</th>
+                        <th class="">Div</th>
+                        <th class="">Elga Class</th>
+                        <th class="">Div</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr role="row" class="odd" ng-repeat="classDivisionFilterDetail in classDivisionFilterDetails">
+                        <td class="">{{($index + 1)}}</td>
+                        <td style="white-space:nowrap;">{{classDivisionFilterDetail.sfirstname}} {{classDivisionFilterDetail.smiddlename}} {{classDivisionFilterDetail.slastname}}</td>
+                        <td class="">{{classDivisionFilterDetail.class.name}}</td>
+                        <td class="">
+                            <label class="field select">
+                                <select ng-change="submitRegularDivDetail(selectedRegularDivision.id, classDivisionFilterDetail)" ng-model="selectedRegularDivision.id">
+                                    <option value="">{{classDivisionFilterDetail.division.name}}</option>
+                                    <option ng-repeat="selectedRegularDivision in regularDivisionDetails" ng-value="{{selectedRegularDivision.id}}">{{selectedRegularDivision.name}}</option>
+                                </select>
+                                <!-- <select ng-model="classDivisionFiltclassDivisionDetailerDetail.division.id" ng-change="submitClassDivisionDetail1(classDivisionFilterDetail)"
+                                    ng-options="classDivisionFilterDetail.divs.id as selectRegularDivision.name for selectRegularDivision in filterDiv">
+                                    <option value="">Division</option>
+                                </select> -->
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                        <td class="">{{classDivisionFilterDetail.elgaclass.name}}</td>
+                        <td class="">
+                            <label class="field select">
+                                <select ng-change="submitElgaDivDetail(selectelgaDivision.id, classDivisionFilterDetail)" ng-model="selectelgaDivision.id">
+                                    <option value="">{{classDivisionFilterDetail.elgadivision.name}}</option>
+                                    <option ng-repeat="selectelgaDivision in elgaDivisionDetails" value="{{selectelgaDivision.id}}">{{selectelgaDivision.name}}</option>
+                                </select>
+                                <!-- <select ng-model="classDivisionFilterDetail.elgadivision.id" ng-change="submitClassDivisionDetail(classDivisionFilterDetail)"
+                                    ng-options="classDivisionFilterDetail.elgadivision.id as classDivisionFilterDetail.elgadivision.name for classDivisionFilterDetail in classDivisionFilterDetails">
+                                    <option value="">Elga</option>
+                                </select> -->
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,187 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashdepartment.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">System Masters</li>
+                <li class="crumb-trail">Departments</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage Departments
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="editor_create btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addDepartmentModal">
+                            <span class="glyphicons glyphicons-circle_plus"></span> Add Department</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add model pop-up -->
+            <div class="modal fade" id="addDepartmentModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelDepartment()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Department</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="pb10">
+                                <form name="addDepartmentForm" role="form" ng-submit="addDepartmentDetails(addDepartmentForm)" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Department Name:</label>
+                                                <div class="section">
+                                                    <input type="text" class="form-control v-form-control" name="name" ng-model="addDepartmentData.name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                                        required autocomplete="off" placeholder="Department Name" id="name">
+                                                    <span ng-messages="((addDepartmentForm.name.$touched && addDepartmentForm.name.$error) || (addDepartmentForm.$submitted && addDepartmentForm.name.$error))"
+                                                        role="alert">
+                                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                        <span class="error_msg" ng-message="pattern">Please enter valid department name.</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Department Manager:</label>
+                                                <div class="section">
+                                                    <select ng-model="departmentDetailsByid.manager_id" class="form-control">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="department in departmentDetails" ng-value="{{department.manager.id}}">{{department.manager.name}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                        Submit</button>
+                                </form>
+                                <div class="error_msg text-center pt10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit model pop-up -->
+            <div class="modal fade" id="editDepartmentModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelDepartment()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit School Department</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="pb10">
+                                <form name="editDepartmentForm" role="form" ng-submit="editDepartmentDetails(editDepartmentForm)" novalidate>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Department Name:</label>
+                                                <input type="text" class="form-control v-form-control" name="name" ng-model="departmentDetailsByid.name" ng-pattern="/^[a-zA-Z\s]*$/"
+                                                    required autocomplete="off" placeholder="Department Name" id="name">
+                                                <span ng-messages="((editDepartmentForm.name.$touched && editDepartmentForm.name.$error) || (editDepartmentForm.$submitted && editDepartmentForm.name.$error))"
+                                                    role="alert">
+                                                    <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                                    <span class="error_msg" ng-message="pattern">Please enter valid department name.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Department Manager:</label>
+                                                <div class="section">
+                                                    <select ng-model="departmentDetailsByid.manager_id" class="form-control">
+                                                        <option value="">Select</option>
+                                                        <option ng-repeat="department in departmentDetails" value="{{department.manager.id}}">{{department.manager.name}}</option>
+                                                    </select>
+                                                    <i class="arrow double"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                        Submit</button>
+                                </form>
+                                <div class="error_msg text-center pt10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End of model pop up -->
+
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="">Department Name</th>
+                        <th class="">Department Manager</th>
+                        <th class="text-center cursor">Edit</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th class="">Department Name</th>
+                        <th class="">Department Manager</th>
+                        <th class="text-center cursor">Edit</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr id="row_4" role="row" class="odd" ng-repeat="department in departmentDetails">
+                        <td class="">{{department.name}}</td>
+                        <td class="">{{department.manager.name}}</td>
+                        <td class="text-center">
+                            <a ng-click="getDepartmentDetailsByID(department.id)" data-toggle="modal" data-target="#editDepartmentModal" class="text-center cursor">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- End: Content -->
+
+</section>

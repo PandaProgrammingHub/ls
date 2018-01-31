@@ -1,0 +1,153 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">School Master</li>
+                <li class="crumb-trail">Resource Type</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage School Resource Type
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="editor_create btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addResourceTypeModal"><span class="glyphicons glyphicons-circle_plus"></span>Add Resource Type</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add model pop-up -->
+            <div class="modal fade" id="addResourceTypeModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelResourceType()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Resource Type</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="pb10">
+                                <form name="addResourceTypeForm" role="form" ng-submit="addResourceTypeDetails(addResourceTypeForm)" novalidate>
+                                    <div class="form-group">
+                                        <label for="title">Resource Type Title:</label>
+                                        <input type="text" class="form-control v-form-control" name="title" ng-model="addResourceTypeData.title" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                            required autocomplete="off" placeholder="ResourceType Title" id="title">
+                                        <span ng-messages="((addResourceTypeForm.title.$touched && addResourceTypeForm.title.$error) || (addResourceTypeForm.$submitted && addResourceTypeForm.title.$error))"
+                                            role="alert">
+                                            <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                            <span class="error_msg" ng-message="pattern">Please enter valid resourceType title.</span>
+                                        </span>
+                                    </div>
+                                    <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                            Submit</button>
+                                    <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit model pop-up -->
+            <div class="modal fade" id="editResourceTypeModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelResourceType()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Resource Type</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="editResourceTypeForm" role="form" ng-submit="editResourceTypeDetails(editResourceTypeForm)" novalidate>
+                                <div class="form-group">
+                                    <label for="title">Resource Type Title:</label>
+                                    <input type="text" class="form-control v-form-control" name="title" ng-model="resourceTypeDetailsByid.title" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                        required autocomplete="off" placeholder="Resource Type title" id="title">
+                                    <span ng-messages="((editResourceTypeForm.title.$touched && editResourceTypeForm.title.$error) || (editResourceTypeForm.$submitted && editResourceTypeForm.title.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid resourceType title.</span>
+                                    </span>
+                                </div>
+                                <button type="submit" class="btn btn-primary center-block element_center">Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>                                        
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of model pop up -->
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info">
+                <thead>
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Resource Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <!-- <th class="text-center">ID</th> -->
+                        <th class="">Resource Type</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr id="row_4" role="row" class="odd" ng-repeat="resourceType in resourceTypeDetails">
+                        <!-- <td class="text-center sorting_1">{{resourceType.id}}</td> -->
+                        <td class="">{{resourceType.title}}</td>
+                        <td class="text-center">{{resourceType.created_at | date : "y-MM-dd"}}</td>
+                        <td class="text-center">
+                            <a ng-click="getResourceTypeDetailsByID(resourceType.id)" data-toggle="modal" data-target="#editResourceTypeModal" class="text-center editor_edit cursor"
+                            >Edit</a>
+                        </td>
+                        <td class="text-center">
+                            <a ng-click="deleteResourceTypeDetails(resourceType.id)" class="text-center editor_edit cursor">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="notification_popup">Resource Type already exist.</div>
+        </div>
+
+    </div>
+    <!-- End: Content -->
+
+</section>

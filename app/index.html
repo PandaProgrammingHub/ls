@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <base href="/">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lead School ERP </title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300">
+    <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="/assets/skin/default_skin/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/admin-tools/admin-forms/css/admin-forms.css">
+</head>
+
+<body ng-app="MyApp" ng-class="$isExternalPage ? 'external-page sb-l-c sb-r-c' : 'ecommerce-page sb-r-c onload-check sb-l-o mt6'">
+    <div id="main">
+        <div ng-if="$header" ng-include src="'partials/common/header.html'"></div>
+        <div ng-if="$leftsidebar" ng-include src="'partials/common/leftsidebar.html'"></div>
+        <div ui-view autoscroll="true"></div>
+    </div>
+    <div ng-if="$footer" ng-include src="'partials/common/footer.html'"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/lib/jquery.js"></script>
+    <script src="/js/lib/bootstrap.js"></script>
+    <script src="/js/lib/angular.js"></script>
+    <script src="/js/lib/angular-ui-bootstrap.js"></script>
+    <script src="/js/lib/angular-ui-route.js"></script>
+    <script src="/js/lib/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.2/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.10.0/checklist-model.min.js"></script>
+    <script src="/js/lib/satellizer.js"></script>
+    <script src="/js/application.js"></script>
+    <script src="/js/templates.js"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery-1.11.1.min.js"></script>
+
+    <!-- Page Plugins -->
+    <script type="text/javascript" src="/assets/js/pages/login/EasePack.min.js"></script>
+    <script type="text/javascript" src="/assets/js/pages/login/rAF.js"></script>
+    <script type="text/javascript" src="/assets/js/pages/login/TweenLite.min.js"></script>
+    <script type="text/javascript" src="/assets/js/pages/login/login.js"></script>
+
+    <!-- Theme Javascript -->
+    <script type="text/javascript" src="/assets/js/utility/utility.js"></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/assets/js/demo.js"></script>
+
+</body>
+
+</html>

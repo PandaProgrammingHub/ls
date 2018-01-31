@@ -1,0 +1,232 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a href="index.html">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="index.html">Students</a>
+                </li>
+                <li class="crumb-trail">Promote Students</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu p12 admin-form theme-primary">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="m10 mb20">
+                        <h4>
+                            Promote Students
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <div class="col-md-3 col-sm-6 col-xs-6 mb10">
+                                <label for="zip" class="field prepend-icon">
+                                    <input type="text" name="uname" id="class" class="gui-input" placeholder="Student Name">
+                                    <label for="zip" class="field-icon">
+                                        <i class="glyphicons glyphicons-group"></i>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-6 mb10">
+                                <label class="field select">
+                                    <select id="class"  name="class" ng-model="studentfilterdata.classid" placeholder="Class"
+                                                            >
+                                                            <option value="">Class</option>
+                                                            <option ng-repeat="classDetails in classDetails"  value="{{classDetails.id}}">{{classDetails.name}}</option>
+                                                        </select>
+                              
+                                <i class="arrow double"></i>
+                            </label>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-6 mb10">
+                                <label class="field select">
+                                    <select id="division"  name="division" ng-model="studentfilterdata.divisionid" placeholder="Division"
+                                    >
+                                    <option value="">Division</option>
+                                    <option ng-repeat="sectionDetails in sectionDetails" value="{{sectionDetails.id}}">{{sectionDetails.name}}</option>
+                                </select>
+                               <select id="location" name="location" placeholder="Class">
+                                    <option value="">Class</option>
+                                    <option value="AL">Nursery</option>
+                                    <option value="DZ">JKG</option>
+                                    <option value="DZ">SKG</option>
+                                </select> 
+                                <i class="arrow double"></i>
+                            </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="pull-right">
+                                <button class="btn btn-sm btn-dark btn-block">
+                                    <span class="glyphicons glyphicons-search"></span>
+                                    Search</button>
+                            </div>
+                        </div>
+                    </div> -->
+            <div class="row">
+                <form method="get" name="Schoolsubjectform" ng-submit="GetstudentsData()">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                            <label for="zip" class="field prepend-icon">
+                                <input type="text" name="name" ng-model="studentfilterdata.name" id="class" class="gui-input" placeholder="Name">
+                                <label for="zip" class="field-icon">
+                                    <i class="glyphicons glyphicons-notes_2"></i>
+                                </label>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                            <label class="field select">
+                                <select id="class" name="class" ng-model="studentfilterdata.regularclassid" placeholder="Class">
+                                    <option value="">Class</option>
+                                    <option ng-repeat="regularclass in regularclass" value="{{regularclass.id}}">{{regularclass.name}}</option>
+                                </select>
+
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                            <label class="field select">
+                                <select id="division" name="division" ng-model="studentfilterdata.regulardivisionid" placeholder="Division">
+                                    <option value="">Division</option>
+                                    <option ng-repeat="sectionDetails_regular in sectionDetails_regular" value="{{sectionDetails_regular.id}}">{{sectionDetails_regular.name}}</option>
+                                </select>
+
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                            <label class="field select">
+                                <select id="elevel1" name="elevel1" ng-model="studentfilterdata.elgastartclassid" placeholder="ELGA Level">
+                                    <option value="">ELGA Level</option>
+                                    <option ng-repeat="elgaclass in elgaclass" value="{{elgaclass.id}}">{{elgaclass.name}}</option>
+                                </select>
+
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                            <label class="field select">
+                                <select id="state" name="state" ng-model="studentfilterdata.elgastartdivisionid" placeholder="ELGA Division">
+                                    <option value="">ELGA Division</option>
+                                    <option ng-repeat="sectionDetails_elga in sectionDetails_elga" value="{{sectionDetails_elga.id}}">{{sectionDetails_elga.name}}</option>
+                                </select>
+
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="pull-right">
+                            <button class="btn btn-sm btn-dark btn-block">
+                                <span class="glyphicons glyphicons-search"></span> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" class="table" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13">
+                <thead>
+                    <tr>
+                        <th>Sr No.</th>
+                        <th>Student Name</th>
+                        <th>Class</th>
+                        <th>Div</th>
+                        <th>ELGA Class</th>
+                        <th>ELGA Div</th>
+                        <th>Class Promote</th>
+                        <th>Class Div</th>
+                        <th>ELGA Promote</th>
+                        <th>ELGA Div</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="row_4" role="row" class="promotionclass" ng-repeat="studentsDetail in studentspromotionDetails">
+                        <td class="text-center sorting_asc">{{ ($index + 1)}}</td>
+                        <td class="">{{studentsDetail.sfirstname }}{{studentsDetail.smiddlename }}{{studentsDetail.slastname}}</td>
+                        <td class="">{{studentsDetail.class.name}}</td>
+                        <td class="">{{studentsDetail.division.name}}</td>
+                        <td class="">{{studentsDetail.elgaclass.name}}</td>
+                        <td class="">{{studentsDetail.elgadivision.name}}</td>
+                        <td style="display:none"class="">
+                            <input type="hidden" name="admissionId" ng-model="studentsDetail.admissionId" />
+                        </td>
+                        <td>
+                            <label class="form_label mn field select">
+                                <select ng-model="studentsDetail.action" ng-change="onregularactionChange(studentsDetail.action,studentsDetail)" ng-options="regularaction.id as regularaction.name for regularaction in regularaction">
+                                    <option value="">Select</option>
+                                </select>
+                                <!-- <select id="action" ng-model="regular_action" onchange="showSelectValue()">
+                                                <option value="">Select</option>
+                                            <option value="PM">Promote</option>
+                                            <option value="DT">Detaine</option>
+                                            <option value="TC">TC</option>
+                                        </select> -->
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="form_label mn field select">
+                                <select id="division" name="division" ng-model="studentsDetail.new_regular_division_id" ng-disabled="studentsDetail.rdivisioDisabled">
+                                    <option value="">Division</option>
+                                    <option ng-repeat="sectionDetails_regular in sectionDetails_regular" value="{{sectionDetails_regular.id}}">{{sectionDetails_regular.name}}</option>
+                                </select>
+
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="form_label mn field select">
+                                <select id="location" class="p5" name="location" ng-model="studentsDetail.elga_action" ng-disabled="studentsDetail.eclassDisabled">
+                                    <option value="">Select</option>
+                                    <option value="promote">Promote</option>
+                                    <option value="terminate">Detaine</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="form_label mn field select">
+
+                                <select id="state" name="state" ng-model="studentsDetail.new_elga_division_id" ng-disabled="studentsDetail.edivisionDisabled">
+                                    <option value="">EDivision</option>
+                                    <option ng-repeat="sectionDetails_elga in sectionDetails_elga" value="{{sectionDetails_elga.id}}">{{sectionDetails_elga.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="m15 mt25">
+                <div class="row">
+                    <div class="col-md-1 center-block">
+                        <input type="submit" ng-click="submitpromotiondata(studentspromotionDetails)" class="p10 pl20 pr20 orange_btn center-block button btn btn-sm btn-hover btn-primary text-center"
+                            value="Submit">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End: Content -->
+</section>

@@ -1,0 +1,269 @@
+<section id="content_wrapper">
+   
+    <header id="topbar">
+        <div class="topbar-left" >
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="salesdashboard">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                        <a ui-sref="school_master"> {{schoolname}}</a>
+                    </li>
+                <li class="crumb-trail">Manage Students</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary admin-form">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6 mb20">
+                    <div class="">
+                        <h4>
+                            Manage Students
+                        </h4>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-sm-3 col-xs-2">
+
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5">
+                        <div class="pull-right">
+                            <a class="editor_create btn btn-sm btn-primary btn-block"  type="button" ng-click="addStudentmanagement(schoolId,schoolname)"
+                            href="javascript:void(0);" >
+                                <span class="glyphicons glyphicons-circle_plus"></span> Add Student</a>
+                        </div>
+
+                        <div class="pull-left up_file">
+                                <!-- <input type="file" onchange="uploadFile($files)"accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /> -->
+                                <label class="field prepend-icon file">
+                                    <span class="button btn-primary up_btn">Choose File</span>
+                                    <input type="file" class="gui-file" name="file2" id="file2" onchange="uploadFile($files)"accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                    <!-- <input type="text" class="gui-input" id="uploader2" placeholder="Please Select A File"> -->
+                                    <label class="field-icon"><i class="fa fa-upload"></i>
+                                    </label>
+                                </label>
+                            </div>
+
+                        <!-- <div class="pull-left">
+                                <input type="file" onchange="uploadFile($files)"accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                        </div>
+                        <div class="pull-left">
+                                <a class="editor_create btn btn-sm btn-primary btn-block"  type="button" ng-click="downloadFile()"
+                                 >
+                                    <span class="glyphicons glyphicons-circle_plus"></span>Download</a>
+                        </div> -->
+                        
+                    </div>
+
+                    
+               
+
+            </div>
+            <div class="row">
+                    <form method="get" name="Schoolsubjectform" ng-submit="showData_filter()">
+                <div class="col-md-10 col-sm-10 col-xs-10">
+                    <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label for="zip" class="field prepend-icon">
+                            <input type="text" name="name" ng-model="studentfilterdata.name" id="class" class="gui-input" placeholder="Name">
+                            <label for="zip" class="field-icon">
+                                <i class="glyphicons glyphicons-notes_2"></i>
+                            </label>
+                        </label>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label class="field select">
+                                <select id="class"  name="class" ng-model="studentfilterdata.regularclassid" placeholder="Class"
+                                                        >
+                                                        <option value="">Class</option>
+                                                        <option ng-repeat="regularclass in regularclass"  value="{{regularclass.id}}">{{regularclass.name}}</option>
+                                                    </select>
+                            <!-- <select id="location" name="location" placeholder="Class">
+                                <option value="">Acad Year</option>
+                                <option value="AL">Nursery</option>
+                                <option value="DZ">JKG</option>
+                                <option value="DZ">SKG</option>
+                            </select> -->
+                            <i class="arrow double"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label class="field select">
+                                <select id="division"  name="division" ng-model="studentfilterdata.regulardivisionid" placeholder="Division"
+                                >
+                                <option value="">Division</option>
+                                <option ng-repeat="sectionDetails_regular in sectionDetails_regular" value="{{sectionDetails_regular.id}}">{{sectionDetails_regular.name}}</option>
+                            </select>
+                            <!-- <select id="location" name="location" placeholder="Class">
+                                <option value="">Class</option>
+                                <option value="AL">Nursery</option>
+                                <option value="DZ">JKG</option>
+                                <option value="DZ">SKG</option>
+                            </select> -->
+                            <i class="arrow double"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label class="field select">
+                                <select id="elevel1"  name="elevel1" ng-model="studentfilterdata.elgastartclassid" placeholder="ELGA Level"
+                                >
+                                <option value="">ELGA Level</option>
+                                <option ng-repeat="elgaclass in elgaclass" value="{{elgaclass.id}}">{{elgaclass.name}}</option>
+                            </select>
+                            <!-- <select id="location" name="location" placeholder="Class">
+                                <option value="">Div</option>
+                                <option value="AL">Nursery</option>
+                                <option value="DZ">JKG</option>
+                                <option value="DZ">SKG</option>
+                            </select> -->
+                            <i class="arrow double"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label class="field select">
+                                <select id="state" name="state" ng-model="studentfilterdata.elgastartdivisionid" placeholder="ELGA Division"
+                                >
+                                <option value="">ELGA Division</option>
+                                <option ng-repeat="sectionDetails_elga in sectionDetails_elga"  value="{{sectionDetails_elga.id}}"
+                                >{{sectionDetails_elga.name}}</option>
+                            </select>
+                            <!-- <select id="location" name="location" placeholder="Class">
+                                <option value="">Elga</option>
+                                <option value="AL">Nursery</option>
+                                <option value="DZ">JKG</option>
+                                <option value="DZ">SKG</option>
+                            </select> -->
+                            <i class="arrow double"></i>
+                        </label>
+                    </div>
+                    <!-- <div class="col-md-3 col-sm-3 col-xs-6 mb10">
+                        <label class="field select">
+                            <select id="location" name="location" placeholder="Class">
+                                <option value="">Status</option>
+                                <option value="AL">Nursery</option>
+                                <option value="DZ">JKG</option>
+                                <option value="DZ">SKG</option>
+                            </select>
+                            <i class="arrow double"></i>
+                        </label>
+                    </div> -->
+                </div>
+
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="pull-right">
+                        <button class="btn btn-sm btn-dark btn-block">
+                            <span class="glyphicons glyphicons-search"></span> Search
+                        </button>
+                    </div>
+                </div>
+                </form>
+            </div>
+
+           
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+
+            <div >
+                <div >
+
+                    <table id="example" cellspacing="0" width="100%" class="table tbl_at admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                        aria-describedby="example_info" style="width: 100%;">
+                        <thead>
+                            <tr class="paginationclass" style="font-weight:bold;">
+                                <th class="text-center sorting_asc">Sr. No</th>
+                                <th class="">Student Code</th>
+                                <th class="wid90">Admission</th>
+                                <th class="wid90">Name</th>
+                                <th class="wid90">Birthday</th>
+                                <th class="">Gender</th>
+                                <th class="">Admission to</th>
+                                <th class="">Division</th>
+                                <th class="">Acadamic year</th>
+                                <th class="">Mobile</th>
+                                <th class="">Father name</th>
+                                <th class="">Mother name</th>
+                                <th class="">Edit</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <tr id="row_4" role="row" class="paginationclass" ng-repeat="studentsDetail in studentsDetails">
+                                <td class="text-center sorting_asc">{{((currentPage-1)*10)+($index + 1)}}</td>
+                                <td class="">{{studentsDetail.id}}</td>
+                                <td class="">
+                                    <ul ng-repeat="sa in studentsDetail.sa" class="ul_list">
+                                        <li>{{sa.admissiondate.split('T')[0]}}</li>
+                                    </ul>
+                                </td>
+                                <td class="">{{studentsDetail.firstname }}{{studentsDetail.middlename }}{{studentsDetail.lastname}}</td>
+                                <td class="">{{studentsDetail.dateofbirth.split('T')[0]}}</td>
+                                    <td class="">{{studentsDetail.gender === '0' ? "F" : "M"}}</td>
+                                <td class="">
+                                    <ul ng-repeat="sa in studentsDetail.sa" class="ul_list">
+                                        <li>{{sa.regularclassname}}</li>
+                                    </ul>
+                                </td>
+                                <td class="">
+                                    <ul ng-repeat="sa in studentsDetail.sa" class="ul_list">
+                                        <li>{{sa.regulardivisionname}}</li>
+                                    </ul>
+                                </td>
+                                <td class="">
+                                    <ul ng-repeat="sa in studentsDetail.sa" class="ul_list">
+                                            <li>{{sa.academicyearid}}</li>
+                                    </ul>
+                                </td>
+                                <td class="">{{studentsDetail.fathersphone}}</td>
+                                <td class="">{{studentsDetail.fathersname}}</td>
+                                <td class="">{{studentsDetail.mothersname}}</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0);" ng-click="editStudentmanagement(studentsDetail.sa[0].schoolid,studentsDetail.id,studentsDetail.sa[0].schoolname)"newwindow="true" class="text-center cursor">Edit</a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+                    <div class="pagination-div align_c">
+                        <div class="pull-left p20">
+                                <a class="editor_create btn btn-sm btn-primary btn-block"  type="button" ng-click="downloadFile()"
+                                    >
+                                    <span class="glyphicons glyphicons-download custom_icon"></span>Download data sheet</a>
+                        </div>
+                        <ul class="pagination">
+                            <li ng-class="DisablePrevPage()">
+                                <a href ng-click="prevPage()">« Prev</a>
+                            </li>
+                            <li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                <a href="#">{{n}}</a>
+                            </li>
+                            <li ng-class="DisableNextPage()">
+                                <a href ng-click="nextPage()">Next »</a>
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>

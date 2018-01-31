@@ -1,0 +1,188 @@
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="#">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">BOY Scores</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu p12 admin-form theme-primary">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="">
+                        <h4>
+                            Manage Students
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <form name="boyFilter" ng-submit="boyFilterDetailResponse()">
+                    <div class="col-md-10 col-sm-10 col-xs-12">
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <input type="text" class="field prepend-icon form-control" placeholder="Name" ng-model="boyStudentDetail.studentName">
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <select ng-model="selectedClassDiv.id" ng-change="getDivision(selectedClassDiv.id)">
+                                    <option value="">Class</option>
+                                    <option ng-repeat="selectedClassDiv in classDivDetail" ng-value="selectedClassDiv.id">{{selectedClassDiv.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <select ng-model="selectDivision.id">
+                                    <option value="">Division</option>
+                                    <option ng-repeat="selectDivision in divisionList" ng-value="selectDivision.id">{{selectDivision.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12 mb10">
+                            <label class="field select">
+                                <select ng-model="boyStudentDetail.elgastatus">
+                                    <option value="">ELGA Status</option>
+                                    <option ng-value="true">Assigned</option>
+                                    <option ng-value="false">Unassigned</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="btn btn-sm btn-dark btn-block">
+                                <span class="glyphicons glyphicons-search"></span>
+                                Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" class="table" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13">
+                <thead>
+                    <tr>
+                        <th>Student Code</th>
+                        <th>Name</th>
+                        <th>T1 Level</th>
+                        <th>T1 Score</th>
+                        <th>T2 Level</th>
+                        <th>T2 Score</th>
+                        <th>T3 Level</th>
+                        <th>T3 Score</th>
+                        <th>T4 Level</th>
+                        <th>T4 Score</th>
+                        <th>Assigned Elga</th>
+                        <th>Reset</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="boyStudentDetails in studentsVM">
+                        <td>{{boyStudentDetails.studentCode}}</td>
+                        <td style="white-space:nowrap;">{{boyStudentDetails.sfirstname}} {{boyStudentDetails.smiddlename}} {{boyStudentDetails.slastname}}</td>
+                        <td>
+                            <label class="field select mb0">
+                                <select ng-disabled="boyStudentDetails.T1.levelDisabled" ng-model="boyStudentDetails.T1.id" ng-options="literacyLevel.id as literacyLevel.literacy_level_start for literacyLevel in litercyLevel"></select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                        <td>
+                            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text"
+                                maxlength="2" class="mini_input" ng-blur="boyScoreSubmitT1(boyStudentDetails)" ng-disabled="boyStudentDetails.T1.scoreDisabled"
+                                ng-model="boyStudentDetails.T1.score">
+                        </td>
+
+                        <div ng-if="boyStudentDetails.T2.show">
+                            <td>
+                                <input type="text" ng-if="boyStudentDetails.T2.show" ng-model="boyStudentDetails.T2.level" 
+                                    class="mini_input" disabled>
+                            </td>
+                            <td>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text"
+                                    maxlength="2" class="mini_input" ng-if="boyStudentDetails.T2.show" ng-blur="boyScoreSubmitT2(boyStudentDetails)"
+                                    ng-disabled="boyStudentDetails.T2.scoreDisabled" ng-model="boyStudentDetails.T2.score">
+                            </td>
+                        </div>
+
+
+                        <div ng-if="boyStudentDetails.T3.show">
+                            <td>
+                                <label class="field select mb0">
+                                    <input type="text" ng-if="boyStudentDetails.T3.show" ng-model="boyStudentDetails.T3.level"
+                                        class="mini_input" disabled>
+                                </label>
+                            </td>
+                            <td>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text"
+                                    maxlength="2" class="mini_input" ng-if="boyStudentDetails.T3.show" ng-blur="boyScoreSubmitT3(boyStudentDetails)"
+                                    ng-disabled="boyStudentDetails.T3.scoreDisabled" ng-model="boyStudentDetails.T3.score">
+                            </td>
+                        </div>
+
+                        <div ng-if="boyStudentDetails.T4.show">
+                            <td>
+                                <label class="field select mb0">
+                                    <input ng-if="boyStudentDetails.T4.show" type="text" ng-model="boyStudentDetails.T4.level"
+                                        class="mini_input" disabled>
+                                </label>
+
+                            </td>
+                            <td>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="text"
+                                    maxlength="2" class="mini_input" ng-if="boyStudentDetails.T4.show" ng-blur="boyScoreSubmitT4(boyStudentDetails)"
+                                    ng-disabled="boyStudentDetails.T4.scoreDisabled" ng-model="boyStudentDetails.T4.score">
+                            </td>
+                        </div>
+                        <td class="text-center">{{boyStudentDetails.assignedElga.name}}</td>
+                        <td class="text-center">
+                            <a ng-click="deletStudenBOYDetail(boyStudentDetails)" class="text-center cursor">Reset</a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Student Code</th>
+                        <th>Name</th>
+                        <th>T1 Level</th>
+                        <th>T1 Score</th>
+                        <th>T2 Level</th>
+                        <th>T2 Score</th>
+                        <th>T3 Level</th>
+                        <th>T3 Score</th>
+                        <th>T4 Level</th>
+                        <th>T4 Score</th>
+                        <th>Assigned Elga</th>
+                        <th>Reset</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+</section>

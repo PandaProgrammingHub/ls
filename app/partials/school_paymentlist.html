@@ -1,0 +1,404 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a ui-sref="salesdashboard">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="salesdashboard">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_basic_profile({schoolId:schoolId,schoolname:schoolname})">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">Payment Summary</li>
+            </ol>
+        </div>
+    </header>
+    <div class="panel p10">
+        <div class="panel-menu p12 admin-form theme-primary">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="">
+                        <!-- <h4>
+                      <span class="fa fa-filter"></span> &nbsp Sales Manager:
+                      <span> XYZ</span>
+                   </h4> -->
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    <div class="pull-right">
+                        <button data-toggle="modal" data-target="#addSchoolPaymentDetails" class="btn btn-sm btn-dark btn-block">
+                            <span class="glyphicons glyphicons-circle_plus"></span> Add Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" class="table" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13">
+                <thead>
+                    <tr class="bg-light">
+                        <th>#SI</th>
+                        <th>Payments Type</th>
+                        <th>Invoice NO.</th>
+                        <th>Payment Status</th>
+                        <th>Raised Date</th>
+                        <th>Due Date</th>
+                        <th>Download Invoice</th>
+                        <th>Amount</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="paymentList in paymentLists">
+                        <td>{{$index+1}}</td>
+                        <td>{{paymentList.payment_type_id}}</td>
+                        <td>{{paymentList.invoices_no}}</td>
+                        <td>{{paymentList.status_id}}</td>
+                        <td>{{paymentList.created_at | date }}</td>
+                        <td>{{paymentList.due_date | date}}</td>
+                        <td>
+                            <a ui-sref="school_payment_invoice_download({schoolId:paymentList.id})" class="hidden-xs badge badge-system fs11 mr10" target="_blank">Download</a>
+                            <!-- <a href="javascript:void(0);" target="_blank" class="hidden-xs badge badge-system fs11 mr10" ng-click="downloadInvoice(paymentList.id)">Download</a> -->
+                        </td>
+                        <td>{{paymentList.amount}}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#editSchoolPaymentDetails" class="btn btn-primary" type="button" ng-click="editPaymentList(paymentList.id)">Edit</button>
+                            <!-- <button class="btn btn-primary" type="button" ng-click="editPaymentList($index)">Edit</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="addSchoolPaymentDetails" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="cancelClass()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Payment Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="addClassForm" role="form" ng-submit="addClassDetails(addClassForm)" novalidate>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Tranche Number: </label>
+                                    <select class="form-control v-form-control">
+                                        <option value="">Select Trache</option>
+                                        <option value="trach_one">Trache One</option>
+                                        <option value="trach_two">Trache Two</option>
+                                        <option value="trach_three">Trache Three</option>
+                                        <option value="trach_four">Trache Four</option>
+                                        <option value="trach_five">Trache Five</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="amount">Amount:</label>
+                                    <input type="text" class="form-control v-form-control" name="code" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Amount" id="code">
+                                    <span ng-messages="((addClassForm.code.$touched && addClassForm.code.$error) || (addClassForm.$submitted && addClassForm.code.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Invoice Data:</label>
+                                    <input type="date" class="form-control v-form-control" name="date" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Amount" id="date">
+                                    <span ng-messages="((addClassForm.date.$touched && addClassForm.date.$error) || (addClassForm.$submitted && addClassForm.date.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Due Data:</label>
+                                    <input type="date" class="form-control v-form-control" name="date" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Amount" id="date">
+                                    <span ng-messages="((addClassForm.date.$touched && addClassForm.date.$error) || (addClassForm.$submitted && addClassForm.date.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Status: </label>
+                                    <select class="form-control v-form-control">
+                                        <option value="">Select Status</option>
+                                        <option value="complete">Complete</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Invoice Number:</label>
+                                    <input type="text" class="form-control v-form-control" name="date" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Amount" id="date">
+                                    <span ng-messages="((addClassForm.date.$touched && addClassForm.date.$error) || (addClassForm.$submitted && addClassForm.date.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Comment: </label>
+                                    <textarea class="gui-textarea form-control v-form-control" placeholder="Your comment" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Upload Invoice: </label>
+                                    <button type="file" class="editor_create btn btn-primary center-block">Browse File</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Payment Mode: </label>
+                                    <select class="form-control v-form-control">
+                                        <option value="">Select Payment Mode</option>
+                                        <option value="netBanking">Net Banking</option>
+                                        <option value="demandDraft">Demand Draft</option>
+                                        <option value="cheque">Cheque</option>
+                                        <option value="cashe">Cash</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="amount">Ref Number:</label>
+                                    <input type="text" class="form-control v-form-control" name="code" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Refrence Number" id="code">
+                                    <span ng-messages="((addClassForm.code.$touched && addClassForm.code.$error) || (addClassForm.$submitted && addClassForm.code.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Payment Data:</label>
+                                    <input type="date" class="form-control v-form-control" name="date" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Amount" id="date">
+                                    <span ng-messages="((addClassForm.date.$touched && addClassForm.date.$error) || (addClassForm.$submitted && addClassForm.date.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="amount">Bank Name:</label>
+                                    <input type="text" class="form-control v-form-control" name="code" ng-pattern="/^[a-zA-Z0-9\s]*$/" required autocomplete="off"
+                                        placeholder="Enter Bank Name" id="code">
+                                    <span ng-messages="((addClassForm.code.$touched && addClassForm.code.$error) || (addClassForm.$submitted && addClassForm.code.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid class code.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                            Submit</button>
+                        <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Add Modal End-->
+
+    <!-- Edit School Payment Details Modal pop-up -->
+    <div class="modal fade" id="editSchoolPaymentDetails" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Payment Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="editPaymentDetailsForm" role="form" ng-submit="editPaymentDetails(editPaymentDetailsForm)" novalidate>
+                        <input type="hidden" name="paymentId" id="paymentId" ng-model="paymentId" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label">Type</label>
+                                    </div>
+                                    <div class="col-lg-8" ng-class="showMessage(editPaymentDetailsForm.type)?'state-error':''">
+                                        <select id="type" required ng-model="payment.payment_type_id" name="type" class="form-control">
+                                            <option value="0">Select</option>
+                                            <option value="1">Type 1</option>
+                                            <option value="2">Type 2</option>
+                                        </select>
+                                        <i class="arrow double"></i>
+                                        <span ng-messages="(editPaymentDetailsForm.type.$touched && editPaymentDetailsForm.type.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.type)">Please chose type.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label">Amount</label>
+                                    </div>
+                                    <div class="col-lg-8" ng-class="showMessage(editPaymentDetailsForm.amount)?'state-error':''">
+                                        <input type="number" required id="amount" name="amount" ng-model="payment.amount" class="form-control" placeholder="Enter Amount">
+                                        <span ng-messages="(editPaymentDetailsForm.amount.$touched && editPaymentDetailsForm.amount.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.amount)">Please chose amount.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt20">
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label leftalign">Installation No.</label>
+                                    </div>
+                                    <div class="col-lg-8" ng-class="showMessage(editPaymentDetailsForm.installation_no)?'state-error':''">
+                                        <select id="installation_no" required ng-model="payment.installment_no" name="filter-status" class="form-control">
+                                            <option value="0">Select</option>
+                                            <option value="1">Installation no. 1</option>
+                                            <option value="2">Installation no. 2</option>
+                                        </select>
+                                        <i class="arrow double"></i>
+                                        <span ng-messages="(editPaymentDetailsForm.installation_no.$touched && editPaymentDetailsForm.installation_no.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.installation_no)">Please chose Installation.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label" for="datetimepicker1">Invoice Date</label>
+                                    </div>
+                                    <div class="col-md-8" ng-class="showMessage(editPaymentDetailsForm.invoice_date)?'state-error':''">
+                                        <div class="input-group date" id="datetimepicker1">
+                                            <span class="input-group-addon cursor">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="date" required ng-model="payment.invoice_date" name="invoice_date" id="invoice_date" class="w135 form-control">
+                                            <span ng-messages="(editPaymentDetailsForm.invoice_date.$touched && editPaymentDetailsForm.invoice_date.$error)" role="alert">
+                                                <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.invoice_date)">Please Enter Invoices date.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt10">
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label leftalign">Status</label>
+                                    </div>
+                                    <div class="col-lg-8" ng-class="showMessage(editPaymentDetailsForm.status)?'state-error':''">
+                                        <select ng-model="payment.status_id" required name="status" id="status" class="form-control">
+                                            <option value="0">Select</option>
+                                            <option value="1">Deatctive</option>
+                                        </select>
+                                        <i class="arrow double"></i>
+                                        <span ng-messages="(editPaymentDetailsForm.status.$touched && editPaymentDetailsForm.status.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.status)">Please select status.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-horizontal">
+                                    <div class="col-lg-4">
+                                        <label for="name" class="control-label" for="datetimepicker1">Due Date</label>
+                                    </div>
+                                    <div class="col-lg-8" ng-class="showMessage(editPaymentDetailsForm.due_date)?'state-error':''">
+                                        <div class="input-group date disable" id="datetimepicker1">
+                                            <span class="input-group-addon cursor">
+                                                <i class="fa fa-calendar"></i>
+                                            </span>
+                                            <input type="date" required ng-model="payment.due_date" name="due_date" id="due_date" class="w135 form-control">
+                                            <span ng-messages="(editPaymentDetailsForm.due_date.$touched && editPaymentDetailsForm.due_date.$error)" role="alert">
+                                                <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.due_date)">Please enter due date.</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt20">
+                            <div class="col-md-12">
+                                <div class="form-group form-horizontal">
+                                    <label class="col-lg-2 control-label" for="textArea1">Comment</label>
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control textarea-grow fullht" ng-model="payment.comment" name="comment" id="comment" rows="4"></textarea>
+                                        <span ng-messages="(editPaymentDetailsForm.comment.$touched && editPaymentDetailsForm.comment.$error)" role="alert">
+                                            <span class="error-message" ng-show="showMessage(editPaymentDetailsForm.comment)">Please enter due date.</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-md-4 center-block">
+                                    <!-- <button type="button" class="center-block btn btn-default text-center" data-dismiss="modal">Submit</button> -->
+                                    <button type="submit" class="btn btn-default center-block element_center">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

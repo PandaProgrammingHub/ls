@@ -1,0 +1,157 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">School Master</li>
+                <li class="crumb-trail">Component</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage School Component
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addComponentModal">Add Component</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add model pop-up -->
+            <div class="modal fade" id="addComponentModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelComponent()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add School Component</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="pb10">
+                                <form name="addComponentForm" role="form" ng-submit="addComponentDetails(addComponentForm)" novalidate>
+                                    <div class="form-group">
+                                        <label for="name">Component Name:</label>
+                                        <input type="text" class="form-control v-form-control" name="name" ng-model="addComponentData.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                            required autocomplete="off" placeholder="Component Name" id="name">
+                                        <span ng-messages="((addComponentForm.name.$touched && addComponentForm.name.$error) || (addComponentForm.$submitted && addComponentForm.name.$error))"
+                                            role="alert">
+                                            <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                            <span class="error_msg" ng-message="pattern">Please enter valid component name.</span>
+                                        </span>
+                                    </div>
+                                    <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                            Submit</button>
+                                    <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit model pop-up -->
+            <div class="modal fade" id="editComponentModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelComponent()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Component</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="pb10">
+                                <form name="editComponentForm" role="form" ng-submit="editComponentDetails(editComponentForm)" novalidate>
+                                    <div class="form-group">
+                                        <label for="name">Component Name:</label>
+                                        <input type="text" class="form-control v-form-control" name="name" ng-model="componentDetailsByid.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                            required autocomplete="off" placeholder="Component Name" id="name">
+                                        <span ng-messages="((editComponentForm.name.$touched && editComponentForm.name.$error) || (editComponentForm.$submitted && editComponentForm.name.$error))"
+                                            role="alert">
+                                            <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                            <span class="error_msg" ng-message="pattern">Please enter valid component name.</span>
+                                        </span>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary center-block element_center">Submit</button>
+                                    <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- End of model pop up -->
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info">
+                <thead>
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Component Name</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <!-- <th class="text-center">ID</th> -->
+                        <th class="">Component Name</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr id="row_4" role="row" class="odd" ng-repeat="component in componentDetails">
+                        <!-- <td class="text-center sorting_1">{{component.id}}</td> -->
+                        <td class="">{{component.component_name}}</td>
+                        <td class="text-center">{{component.created_at | date : "y-MM-dd"}}</td>
+                        <td class="text-center">
+                            <a ng-click="getComponentDetailsByID(component.id)" data-toggle="modal" data-target="#editComponentModal" class="text-center editor_edit cursor">Edit</a>
+                        </td>
+                        <td class="text-center">
+                            <a ng-click="deleteComponentDetails(component.id)" class="text-center editor_edit cursor">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="notification_popup">Component Name already exist.</div>
+        </div>
+
+    </div>
+    <!-- End: Content -->
+
+</section>

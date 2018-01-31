@@ -1,0 +1,316 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a ui-sref="salesdashboard">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <aui-sref="salesdashboard">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_basic_profile({schoolId:schoolId,schoolname:schoolname})">{{schoolname}}</a>                        
+                </li>
+
+                <li class="crumb-trail">School Class Config</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel-menu p12 admin-form theme-primary">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="">
+                    <h4>
+                        School Config
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <form class="form-horizontal" method="post" ng-submit="classConfig(classConfigForm)" id="classConfigForm" name="classConfigForm" novalidate>
+        <div class="row">
+            <div class="col-md-6 form-horizontal">
+                <div class="col-md-3 form-group">
+                    <label for="inputStandard" class="control-label">Institutional Kits</label>
+                </div>
+                <div class="col-md-4 section">
+                    <label class="field select" ng-class="showMessage(classConfigForm.perschoolKits)?'state-error':''">
+                        <select id="data.kits.institutional_kits_count" required ng-model="data.kits.institutional_kits_count" name="data.kits.institutional_kits_count" ng-options="n for n in [] | range:0:10">
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+                <div class="col-md-4 section">
+                    <input type="text" name="data.kits.institutional_kits_amount" id="data.kits.institutional_kits_amount" required="" ng-model="data.kits.institutional_kits_amount" class="field">
+                </div>
+            </div>
+
+            <div class="col-md-6 form-horizontal">
+                <div class="col-md-4 form-group">
+                    <label for="inputStandard" class="control-label">Technology Kits</label>
+                </div>
+                <div class="col-md-4 section">
+                    <label class="field select">
+                        <select id="data.kits.technology_kits_count" required ng-model="data.kits.technology_kits_count" name="data.kits.technology_kits_count" ng-options="n for n in [] | range:0:100">
+                        </select>
+                        <i class="arrow"></i>
+                    </label>
+                </div>
+                <div class="col-md-4 section">
+                    <input type="text" name="data.kits.technology_kits_amount" id="data.kits.technology_kits_amount" required="" ng-model="data.kits.technology_kits_amount" class="field">
+                </div>
+            </div>
+        </div>
+        <div class="tab-block mb25">
+            <ul class="nav nav-tabs tabs-border">
+                <li class="active">
+                    <a href="javascript:void(0);" data-target="#regular" data-toggle="tab">Regular Classes</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" data-target="#elga" data-toggle="tab">ELGA Classes</a>
+                 </li>
+            </ul>
+            <div class="tab-content">
+                <div id="regular"  class="tab-pane active">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Class</th>
+                                                <th class="text-center">Divisons</th>
+                                                <th class="text-center">Total Students</th>
+                                                <th class="text-center">Student Kit Cost</th>
+                                                <th class="text-center">Assessments Cost</th>
+                                                <th class="text-center">Lead Tech Cost</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="class in data.classes | filter: { class_type: 'regular' }">
+                                                <td class="text-center">
+                                                    <label >
+                                                        <input type="checkbox"  ng-true-value="true"
+                                                        ng-false-value="false"
+                                                        ng-checked="fetchClassConfig({class_id: class.id, param:'checkbox', index: $index })">
+                                                        <b class="pr10">{{class.name}}</b>
+                                                        <!-- <span class="checkbox"></span> -->
+                                                    </label>
+                                                </td>
+
+                                                <td class="text-center">
+
+                                                    <select id="divisons" ng-model="classConfigRegularClasse.divisons"  class="form-control" name="divisons" ng-options="n as n for n in range(1,10)">
+                                                       <option value="">No of Divisions</option>
+                                                        <!-- <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option> -->
+                                                    </select>
+
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <input type="number" id="total_student" ng-model="classConfigRegularClasse.total_student" placeholder="Enter Total number of students"   class="form-control" name="total_student" >
+                                                    <!-- <select id="total_student" ng-model="classConfigRegularClasse.total_student"   class="form-control" name="total_student">
+                                                            <option ng-repeat="n in range(1,1000) " value="{{$index+1}}">{{$index+1}}</option>                                                            
+                                                    </select> -->
+                                                </td>
+                                            </tr>
+                                            
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-md-6">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                        <table class="table table-hover mbn">
+                                                <thead>
+                                                    <tr class="active">
+                                                        <th class="text-center">Class</th>
+                                                        <th class="text-center">Divisons</th>
+                                                        <th class="text-center">Total Students</th>
+        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="classConfigRegularClasse in classConfigRegularClassesArray | limitTo:4: 5">
+                                                        <td class="text-center">
+        
+                                                            <label >                                                                                                                    
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="classConfigRegularClasse.checked" ng-model="classConfigRegularClasse.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeRegularClasses(classConfigRegularClasse)">
+                                                                <b class="pr10" ng-model="classConfigRegularClasse.name">{{classConfigRegularClasse.name}}</b>
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                        
+                                                            <select id="divisons" ng-model="classConfigRegularClasse.divisons" class="form-control" name="divisons" ng-options="n as n for n in range(1,10)">
+                                                                <option value="">No of Divisions</option>
+                                                            </select>
+                                                        
+                                                        </td>
+                                                        
+                                                        <td class="text-center">
+                                                            <input type="number" id="total_student" ng-model="classConfigRegularClasse.total_student" placeholder="Enter Total number of students" class="form-control" name="total_student">
+                                                            <!-- <select id="total_student" ng-model="classConfigRegularClasse.total_student"   class="form-control" name="total_student">
+                                                                                                                                                                                    <option ng-repeat="n in range(1,1000) " value="{{$index+1}}">{{$index+1}}</option>                                                            
+                                                                                                                                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    
+        
+                                                </tbody>
+                                            </table>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div id="elga"  class="tab-pane">
+                    <div class="row myscroll">
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Level</th>
+                                                <th class="text-center">Divisons</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="classConfigElgaClasses in classConfigElgaClassesArray | limitTo:5">
+                                                        <td class="text-center">        
+                                                            <label >                                                         
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="classConfigElgaClasses.checked" ng-model="classConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(classConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="classConfigElgaClasses.name">{{classConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+                                                            <select id="divisons" ng-model="classConfigElgaClasses.divisons" class="form-control" name="divisons" ng-options="n as n for n in range(1,10)">
+                                                                    <option value="">No of Divisions</option>
+                                                                    <!-- <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option> -->
+                                                            </select>
+                                                            <!-- <select id="divisons" ng-model="classConfigElgaClasses.divisons"  class="form-control" name="divisons">
+                                                                <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option>
+                                                            </select> -->
+        
+                                                        </td>
+                                                    </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Level</th>
+                                                <th class="text-center">Divisons</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="classConfigElgaClasses in classConfigElgaClassesArray | limitTo:4:5">
+                                                        <td class="text-center">
+        
+                                                            <label >                                                         
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="classConfigElgaClasses.checked" ng-model="classConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(classConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="classConfigElgaClasses.name">{{classConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+        
+                                                                <select id="divisons" ng-model="classConfigElgaClasses.divisons" class="form-control" name="divisons" ng-options="n as n for n in range(1,10)">
+                                                                        <option value="">No of Divisions</option>
+                                                                        <!-- <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option> -->
+                                                                </select>
+                                                                <!-- <select id="divisons" ng-model="classConfigElgaClasses.divisons"  class="form-control" name="divisons">
+                                                                    <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option>
+                                                                </select> -->
+        
+                                                        </td>
+                                                    </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel" id="spy8">
+                                <div class="panel-body pn">
+                                    <table class="table table-hover mbn">
+                                        <thead>
+                                            <tr class="active">
+                                                <th class="text-center">Level</th>
+                                                <th class="text-center">Divisons</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr ng-repeat="classConfigElgaClasses in classConfigElgaClassesArray | limitTo:4:9">
+                                                        <td class="text-center">
+        
+                                                            <label >                                                         
+                                                                <input type="checkbox" class="checkBoxedClassConfigRegularClasse" name="name" ng-checked="classConfigElgaClasses.checked" ng-model="classConfigElgaClasses.SELECTED" ng-true-value="'Y'" ng-false-value="'N'" ng-change= "changeElgaClasses(classConfigElgaClasses)">
+                                                                <b class="pr10" ng-model="classConfigElgaClasses.name">{{classConfigElgaClasses.name}}</b>
+                                                                <!-- <span class="checkbox"></span> -->
+                                                            </label>
+                                                        </td>
+        
+                                                        <td class="text-center">
+        
+                                                                <select id="divisons" ng-model="classConfigElgaClasses.divisons" class="form-control" name="divisons" ng-options="n as n for n in range(1,10)">
+                                                                        <option value="">No of Divisions</option>
+                                                                        <!-- <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option> -->
+                                                                </select>
+                                                                <!-- <select id="divisons" ng-model="classConfigElgaClasses.divisons"  class="form-control" name="divisons">
+                                                                    <option ng-repeat="n in range(1,10) " value="{{$index+1}}">{{$index+1}}</option>
+                                                                </select> -->
+        
+                                                        </td>
+                                                    </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt10 mb10">
+            <div class="row">
+                <div class="col-md-1 center-block">
+                        <button type="submit" class="btn button btn-primary"> Submit</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+    <!-- End: Content -->
+
+</section>

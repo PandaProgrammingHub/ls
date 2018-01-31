@@ -1,0 +1,134 @@
+<section id="content_wrapper">
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">Home</a>
+                </li>
+                <li class="crumb-link">
+                    <a ui-sref="school_master">School</a>
+                </li>
+                <li class="crumb-link">
+                    <a href="subject_teacherMapping({schoolId:schoolId, schoolname:schoolname})">{{schoolname}}</a>
+                </li>
+                <li class="crumb-trail">Subject Teacher Mapping</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary admin-form">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6 mb20">
+                    <div class="">
+                        <h4>
+                            Subject Teacher Mapping
+                        </h4>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+
+            </div>
+            <div class="row">
+                <form method="get" name="Schoolsubjectform" ng-submit="subjectFilter(Schoolsubjectform)">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <label class="field select">
+                                <select name="class" id="class" ng-model="selectClassDivision.id" ng-change="selectedClassDivision(selectClassDivision.id)">
+                                    <option value="">Class</option>
+                                    <option ng-repeat="selectClassDivision in classDivisionList" ng-value="selectClassDivision.id">{{selectClassDivision.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <label class="field select">
+                                <select id="location" name="location" ng-model="subjectdivisionList.id">
+                                    <option value="">Division</option>
+                                    <option ng-repeat="subjectdivisionList in divisionList" ng-value="subjectdivisionList.id">{{subjectdivisionList.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <label class="field select">
+                                <select id="location" name="location" ng-model="selectsubjectList.id">
+                                    <option value="">Subject</option>
+                                    <option ng-repeat="selectsubjectList in subjectList" ng-value="selectsubjectList.id">{{selectsubjectList.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3">
+                            <label class="field select">
+                                <select id="location" name="location" ng-model="selectClassSubjectTeacherlist.id">
+                                    <option value="">Class Teacher</option>
+                                    <option ng-repeat="selectClassSubjectTeacherlist in classTeacherList" ng-value="{{selectClassSubjectTeacherlist.id}}">{{selectClassSubjectTeacherlist.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-sm btn-dark btn-block">
+                                <span class="glyphicons glyphicons-search"></span> Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info" style="width: 100%;">
+                <thead>
+                    <tr class="bg-light">
+                        <th class="">Class</th>
+                        <th class="">Division</th>
+                        <th class="">Subject</th>
+                        <th class="">Class Teacher</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th class="">Class</th>
+                        <th class="">Division</th>
+                        <th class="">Subject</th>
+                        <th class="">Class Teacher</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr role="row" class="odd" ng-repeat="subjectTeacherMapDetail in subjectTeacherMapDetails">
+                        <td class="">{{subjectTeacherMapDetail.class.name}}</td>
+                        <td class="">{{subjectTeacherMapDetail.division.name}}</td>
+                        <td class="">{{subjectTeacherMapDetail.subject.name}}</td>
+                        <td class="" style="width:29%">
+                            <label class="field select">
+                                <select ng-change="submitSubjectTeacherName(subjecTeachertId, subjectTeacherMapDetail.id)" ng-model="subjecTeachertId">
+                                    <option value="">{{subjectTeacherMapDetail.subject_teacher.name}}</option>
+                                    <option ng-repeat="classSubjectlist in classTeacherList" value="{{classSubjectlist.id}}">{{classSubjectlist.name}}</option>
+                                </select>
+                                <i class="arrow double"></i>
+                            </label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,151 @@
+<!-- Start: Content-Wrapper -->
+<section id="content_wrapper">
+
+    <header id="topbar">
+        <div class="topbar-left">
+            <ol class="breadcrumb">
+                <li class="crumb-icon">
+                    <a href="dashboard.html">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </li>
+                <li class="crumb-trail">School Master</li>
+                <li class="crumb-trail">Cluster</li>
+            </ol>
+        </div>
+    </header>
+
+    <div class="panel p10">
+        <div class="panel-menu theme-primary">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 col-xs-6">
+                    <div class="">
+                        <h4>
+                            Manage School Cluster
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-2">
+
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="pull-right">
+                        <button class="editor_create btn btn-sm btn-primary btn-block" id="class_remove" type="button" data-toggle="modal" data-toggle="modal"
+                            data-target="#addClusterModal">
+                            <span class="glyphicons glyphicons-circle_plus"></span> Add Cluster</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Add Modal -->
+            <div class="modal fade" id="addClusterModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelCluster()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add Cluster</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="addClusterForm" role="form" ng-submit="addClusterDetails(addClusterForm)" novalidate>
+                                <div class="form-group">
+                                    <label for="name">Cluster Name:</label>
+                                    <input type="text" class="form-control v-form-control" name="name" ng-model="addClusterData.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                        required autocomplete="off" placeholder="Cluster Name" id="name">
+                                    <span ng-messages="((addClusterForm.name.$touched && addClusterForm.name.$error) || (addClusterForm.$submitted && addClusterForm.name.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid cluster name.</span>
+                                    </span>
+                                </div>
+                                <button type="submit" class="editor_create btn btn-primary center-block element_center">
+                                    Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Modal End-->
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editClusterModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" ng-click="cancelCluster()" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Cluster</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="editClusterForm" role="form" ng-submit="editClusterDetails(editClusterForm)" novalidate>
+                                <div class="form-group">
+                                    <label for="name">Cluster Name:</label>
+                                    <input type="text" class="form-control v-form-control" name="name" ng-model="clusterDetailsByid.name" ng-pattern="/^[a-zA-Z0-9\s]*$/"
+                                        required autocomplete="off" placeholder="Cluster Name" id="name">
+                                    <span ng-messages="((editClusterForm.name.$touched && editClusterForm.name.$error) || (editClusterForm.$submitted && editClusterForm.name.$error))"
+                                        role="alert">
+                                        <span class="error_msg" ng-message="required">Please complete this mandatory field.</span>
+                                        <span class="error_msg" ng-message="pattern">Please enter valid cluster name.</span>
+                                    </span>
+                                </div>
+                                <button type="submit" class="btn btn-primary center-block element_center">Submit</button>
+                                <div class="error_msg text-center padding-top-10" ng-if="errorMessage">{{errorMessage}}</div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Edit Modal End-->
+        </div>
+
+        <div class="panel-body pn" style="overflow: hidden;">
+            <table id="example" cellspacing="0" width="100%" class="table admin-form theme-warning tc-checkbox-1 fs13 dataTable" role="grid"
+                aria-describedby="example_info">
+                <thead>
+                    <tr class="bg-light">
+                        <!-- <th class="text-center sorting_asc">ID</th> -->
+                        <th class="">Cluster Name</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center cursor">Edit</th>
+                        <th class="text-center cursor">Delete</th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <!-- <th class="text-center">ID</th> -->
+                        <th class="">Cluster Name</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    <tr id="row_1" role="row" class="odd" ng-repeat="cluster in clusterDetails">
+                        <!-- <td class="text-center sorting_1">{{cluster.id}}</td> -->
+                        <td class="">{{cluster.name}}</td>
+                        <td class="text-center">{{cluster.created_at | date : "y-MM-dd"}}</td>
+                        <td class="text-center">
+                            <a ng-click="getClusterDetailsByID(cluster.id)" data-toggle="modal" data-target="#editClusterModal" class="text-center editor_edit cursor">Edit</a>
+                        </td>
+                        <td class=" text-center">
+                            <a ng-click="deleteClusterDetails(cluster.id)" class="text-center editor_edit cursor">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="notification_popup">Cluster Name already exist.</div>
+        </div>
+
+    </div>
+    <!-- End: Content -->
+
+</section>
